@@ -1,0 +1,143 @@
+[gd_scene load_steps=4 format=3 uid="uid://yvyvoq7hhnjw"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_i0fev"]
+[ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://nivel.tscn" id="2_ttwli"]
+[ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_yijvu"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_i0fev")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.933236, -0.351455, -0.0744939, -0.0294446, -0.281478, 0.959116, -0.358055, -0.892888, -0.273034, 0, 4.29997, -2.35354)
+shadow_enabled = true
+shadow_transmittance_bias = 1.666
+
+[node name="StartScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Label" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 36.0
+offset_right = 1.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Press ENTER to start..."
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -267.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "Zaxxon"
+horizontal_alignment = 1
+
+[node name="StartLabelTimer" type="Timer" parent="StartScreen"]
+wait_time = 0.5
+autostart = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 126.0
+
+[node name="vides_1" type="Sprite2D" parent="UI"]
+position = Vector2(44, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_yijvu")
+
+[node name="vides_2" type="Sprite2D" parent="UI"]
+position = Vector2(116, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_yijvu")
+
+[node name="vides_3" type="Sprite2D" parent="UI"]
+position = Vector2(188, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_yijvu")
+
+[node name="GameOverScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title2" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -267.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 120
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Start2" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = 36.0
+offset_right = 1.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Press ENTER to restart..."
+horizontal_alignment = 1
+
+[node name="Nivel_1" parent="." instance=ExtResource("2_ttwli")]
+
+[node name="DyingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="StartScreen/StartLabelTimer" to="." method="_on_start_label_timer_timeout"]
+[connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]

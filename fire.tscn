@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4cycxmsvuoeo"]
+
+[ext_resource type="Script" path="res://fire.gd" id="1_jm415"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1y2r"]
+size = Vector3(0.118518, 0.0964322, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hukro"]
+size = Vector3(0.1, 0.1, 1)
+
+[node name="Fire" type="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.000754239, 0, -0.0227533)
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_jm415")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_s1y2r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hukro")
+skeleton = NodePath("")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

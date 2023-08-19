@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfiqwdpt5ubsp"]
+
+[ext_resource type="PackedScene" uid="uid://ba3ft62k87jx5" path="res://models/rocket/rocket_baseB.glb" id="1_7hcdw"]
+[ext_resource type="PackedScene" uid="uid://bj8vwyo3t4p5o" path="res://models/rocket/rocket_finsB.glb" id="2_2vxrl"]
+[ext_resource type="PackedScene" uid="uid://bvtnnbblk17m" path="res://models/rocket/rocket_sidesB.glb" id="3_88b7j"]
+[ext_resource type="PackedScene" uid="uid://c80cx1tprcjai" path="res://models/rocket/rocket_topB.glb" id="4_m4d58"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700337, 0, -1.1957)
+
+[node name="rocket_baseB" parent="." instance=ExtResource("1_7hcdw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="rocket_finsB" parent="." instance=ExtResource("2_2vxrl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="rocket_sidesB" parent="." instance=ExtResource("3_88b7j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.67446, 0)
+
+[node name="rocket_topB" parent="." instance=ExtResource("4_m4d58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.68218, 0)
