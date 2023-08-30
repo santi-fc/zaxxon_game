@@ -1,5 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bh4lxpolqps6e"]
+[gd_scene load_steps=18 format=3 uid="uid://bh4lxpolqps6e"]
 
+[ext_resource type="Material" uid="uid://cxed1fhddei6n" path="res://materials/muro.tres" id="1_6q4gh"]
+[ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="1_104py"]
 [ext_resource type="Script" path="res://classes/ScenaryObject.gd" id="1_ystus"]
 [ext_resource type="PackedScene" uid="uid://cvw3yvc3lqkoj" path="res://models/hangar_roundA.glb" id="2_7ionf"]
 [ext_resource type="PackedScene" uid="uid://cku4lg1cn3g2m" path="res://models/satelliteDish_detailed.glb" id="3_5df40"]
@@ -9,14 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://bfiqwdpt5ubsp" path="res://rocket.tscn" id="7_l2gm0"]
 [ext_resource type="Texture2D" uid="uid://d0wixquyvtc32" path="res://textures/nivel_1_suelo.png" id="8_far5a"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgnta"]
-albedo_color = Color(0.933333, 0.317647, 0.764706, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1tsr"]
+albedo_texture = ExtResource("1_104py")
+uv1_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_voc63"]
 size = Vector3(0.246767, 0.125696, 0.235441)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ck1wf"]
-render_priority = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbg6f"]
 size = Vector3(0.168769, 0.121267, 0.156021)
@@ -29,6 +29,7 @@ size = Vector3(1.69795, 3.64998, 1.84439)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_olxid"]
 albedo_texture = ExtResource("8_far5a")
+refraction_scale = 0.82
 uv1_scale = Vector3(-1, -1, -1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_muda0"]
@@ -44,15 +45,16 @@ collision_mask = 10
 [node name="Muro_inicial" type="CSGBox3D" parent="Nivel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29438, -6.6823)
 size = Vector3(1.5, 0.5, 0.2)
-material = SubResource("StandardMaterial3D_lgnta")
+material = ExtResource("1_6q4gh")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Nivel/Muro_inicial"]
 transform = Transform3D(0.656074, 0, 0, 0, 0.246714, 0, 0, 0, 1, 0, 0.188746, 0)
 operation = 2
 size = Vector3(1.5, 0.5, 0.2)
+material = SubResource("StandardMaterial3D_e1tsr")
 
 [node name="base_1" type="StaticBody3D" parent="Nivel" groups=["enemigo", "nivel"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119068, 0, -1.13123)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147138, 0, -0.67721)
 script = ExtResource("1_ystus")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/base_1"]
@@ -63,7 +65,7 @@ shape = SubResource("BoxShape3D_voc63")
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.26, 0.053, -4.77229)
 
 [node name="base_2" type="StaticBody3D" parent="Nivel" groups=["enemigo", "nivel"]]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.148518, 0, -1.11327)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.484203, 0, -0.556505)
 collision_layer = 4
 script = ExtResource("1_ystus")
 
@@ -75,7 +77,7 @@ shape = SubResource("BoxShape3D_voc63")
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.26, 0.053, -4.77229)
 
 [node name="base_3" type="StaticBody3D" parent="Nivel" groups=["enemigo", "nivel"]]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.584566, 0, -0.573721)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -0.803503, 0, 0.0603018)
 collision_layer = 4
 script = ExtResource("1_ystus")
 
@@ -172,8 +174,8 @@ transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.26, 0.053, -4.7722
 
 [node name="muro_2" type="CSGBox3D" parent="Nivel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.241569, 0.1402, -3.64143)
-material_overlay = SubResource("StandardMaterial3D_ck1wf")
 size = Vector3(1, 0.165207, 0.179122)
+material = ExtResource("1_6q4gh")
 
 [node name="satellite_1" type="StaticBody3D" parent="Nivel" groups=["enemigo", "nivel"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.958564)
@@ -266,14 +268,17 @@ shape = SubResource("BoxShape3D_wmft1")
 [node name="muro_3" type="CSGBox3D" parent="Nivel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221554, 0.18729, -2.62863)
 size = Vector3(1, 0.259574, 0.179122)
+material = ExtResource("1_6q4gh")
 
 [node name="muro_4" type="CSGBox3D" parent="Nivel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00320978, 0.280964, -0.285357)
 size = Vector3(1.5, 0.422815, 0.179)
+material = ExtResource("1_6q4gh")
 
 [node name="muro_5" type="CSGBox3D" parent="Nivel"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00320978, 0.521242, 1.63496)
 size = Vector3(1.5, 0.887212, 0.179)
+material = ExtResource("1_6q4gh")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Nivel/muro_5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.266347, 0)

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cxed1fhddei6n"]
+
+[ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="1_c1g5c"]
+
+[resource]
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("1_c1g5c")
+metallic = 0.26
+metallic_specular = 0.8
+metallic_texture = ExtResource("1_c1g5c")
+metallic_texture_channel = 2
+uv1_triplanar = true

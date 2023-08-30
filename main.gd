@@ -85,6 +85,9 @@ func load_level( _which_one ):
 
 func make_fire() :
 	if ( can_fire ) :
+		can_fire = false
+		$FireTimer.start()
+		
 		var fire = fire_scene.instantiate()
 		fire.position = player.position
 		add_child( fire )
@@ -129,3 +132,7 @@ func _on_dying_timer_timeout() :
 	
 	# Habilitamos movimiento
 	player.can_move = true
+
+
+func _on_fire_timer_timeout():
+	can_fire = true

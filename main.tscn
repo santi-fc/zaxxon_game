@@ -145,5 +145,10 @@ metadata/_edit_lock_ = true
 transform = Transform3D(-0.483764, 0.501474, -0.717284, -0.0407435, 0.805774, 0.59082, 0.87425, 0.315042, -0.369373, -1.5581, 1.15182, -0.460496)
 fov = 44.5706
 
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="StartScreen/StartLabelTimer" to="." method="_on_start_label_timer_timeout"]
 [connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
