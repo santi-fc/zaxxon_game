@@ -54,7 +54,7 @@ size = Vector3(1.5, 0.5, 0.2)
 material = SubResource("StandardMaterial3D_e1tsr")
 
 [node name="base_1" type="StaticBody3D" parent="Nivel" groups=["enemigo", "nivel"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.147138, 0, -0.67721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154276, 0.0093646, -0.674647)
 script = ExtResource("1_ystus")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/base_1"]
@@ -296,6 +296,48 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.03859, 0.0567692, -2
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.595024, -0.41619, -2.43137)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/RocketCombo"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.435408, -0.167968, -2.30756)
+shape = SubResource("BoxShape3D_uwyi7")
+
+[node name="RocketCombo2" type="StaticBody3D" parent="Nivel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02953, 0, 2.78651)
+script = ExtResource("6_75yuq")
+
+[node name="Crater" parent="Nivel/RocketCombo2" instance=ExtResource("5_ofian")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.03859, 0.0567692, -2.7605)
+
+[node name="Rocket" parent="Nivel/RocketCombo2" instance=ExtResource("7_l2gm0")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.595024, -0.41619, -2.43137)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/RocketCombo2"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.435408, -0.167968, -2.30756)
+shape = SubResource("BoxShape3D_uwyi7")
+
+[node name="RocketCombo3" type="StaticBody3D" parent="Nivel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473614, 0, 2.78651)
+script = ExtResource("6_75yuq")
+
+[node name="Crater" parent="Nivel/RocketCombo3" instance=ExtResource("5_ofian")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.03859, 0.0567692, -2.7605)
+
+[node name="Rocket" parent="Nivel/RocketCombo3" instance=ExtResource("7_l2gm0")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.595024, -0.41619, -2.43137)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/RocketCombo3"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.435408, -0.167968, -2.30756)
+shape = SubResource("BoxShape3D_uwyi7")
+
+[node name="RocketCombo4" type="StaticBody3D" parent="Nivel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105021, 0, 2.78651)
+script = ExtResource("6_75yuq")
+
+[node name="Crater" parent="Nivel/RocketCombo4" instance=ExtResource("5_ofian")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -1.03859, 0.0567692, -2.7605)
+
+[node name="Rocket" parent="Nivel/RocketCombo4" instance=ExtResource("7_l2gm0")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.595024, -0.41619, -2.43137)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Nivel/RocketCombo4"]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.435408, -0.167968, -2.30756)
 shape = SubResource("BoxShape3D_uwyi7")
 
