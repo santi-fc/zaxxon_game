@@ -55,6 +55,10 @@ func _unhandled_input( event ):
 
 func load_level( _which_one ):
 	# De momento siempre cargamos el nivel 1... (que bastante tenemos ya)
+	var level = load("res://nivel_1.tscn")
+	var level_instance = level.instantiate()
+	add_child( level_instance )
+	
 	$StartScreen.visible = false;
 	$UI.show()
 	current_level = $Nivel_1
@@ -62,7 +66,7 @@ func load_level( _which_one ):
 	# Añadimos jugador
 	player = player_scene.instantiate()
 	
-	camera = get_node("Nivel_1/CameraPivot");
+	camera = get_node("CameraPivot");
 	var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
 	
 	# Lo ponemos mirando a donde toca
