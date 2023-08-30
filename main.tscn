@@ -9,8 +9,9 @@ script = ExtResource("1_i0fev")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.933236, -0.351455, -0.0744939, -0.0294446, -0.281478, 0.959116, -0.358055, -0.892888, -0.273034, 0, 4.29997, -2.35354)
+light_energy = 2.0
 shadow_enabled = true
-shadow_transmittance_bias = 1.666
+sky_mode = 1
 
 [node name="StartScreen" type="Control" parent="."]
 layout_mode = 3
