@@ -8,9 +8,10 @@ var current_level
 var current_time : float
 var can_fire : bool = true
 const max_lives = 3
-var current_lives = 3;
+var current_lives = 3
 
 var game_speed = 0.6
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -16,7 +16,10 @@ func _process( delta ) :
 func _physics_process( delta ) :
 	# Calculamos distancia hasta jugador en eje Z
 	var player = get_parent().get_parent().get_parent().player
+	
 	if ( player ) :
-		var player_position_z = player.position.z
-		var rocket_position_z = position.z
-		print ( rocket_position_z - player_position_z )
+		var player_position_z = player.global_transform.origin.z
+		var rocket_position_z = global_transform.origin.z
+		var distance = rocket_position_z - player_position_z
+		if ( distance <= 4 ) :
+			$Rocket.position.y += 0.006
