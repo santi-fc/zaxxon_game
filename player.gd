@@ -1,7 +1,5 @@
 extends CharacterBody3D
 
-signal live_lost
-
 var movement_step_horizontal = 1
 var movement_step_vertical   =  1
 var movement_rotation        = 10

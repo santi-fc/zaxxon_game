@@ -6,7 +6,6 @@ var speed            = 5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print('ready')
 	start_position_z = 0;
 
 
@@ -24,7 +23,7 @@ func _physics_process( delta ) :
 func _on_body_entered( body ):
 	hide()
 	queue_free()
-	
+	print(body)
 	if body.is_in_group( 'enemigo' ) :
 		body.get_shoot()
 		pass

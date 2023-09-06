@@ -2,6 +2,7 @@ extends Node
 
 var player_scene = load("res://player.tscn")
 var fire_scene   = load("res://fire.tscn")
+var fire_muro_particles = load("res://particles/fire1.tscn")
 var player
 var camera
 var current_level
@@ -11,6 +12,7 @@ const max_lives = 3
 var current_lives = 3
 
 var game_speed = 0.6
+var current_game_speed = 0.6
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,19 +20,21 @@ func _ready():
 	$StartScreen.visible = true
 	$UI.visible = false
 	$GameOverScreen.visible = false
-
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process( _delta ):
-	pass
+	$UI/Speed_Label.text = 'Speed: ' +  str(current_game_speed)
+	$UI/ProgressBar.value = current_game_speed / game_speed * 100
 		
 
 func _physics_process( delta ) :
+	# Move player and camera
 	current_time += delta
 	if player && player.can_move :
-		camera.position.z += game_speed * delta
+		camera.position.z += current_game_speed * delta
 		if ( current_time > 0.7 ) :
-			player.position.z += game_speed * delta
+			player.position.z += current_game_speed * delta
 	
 func _unhandled_input( event ):
 	
@@ -62,7 +66,7 @@ func load_level( _which_one ):
 	
 	$StartScreen.visible = false;
 	$UI.show()
-	current_level = $Nivel_1
+	current_level = level_instance
 	
 	# Añadimos jugador
 	player = player_scene.instantiate()
@@ -123,6 +127,19 @@ func update_lives() :
 			get_node( "UI/vides_" + str( live_counter ) ).hide()
 	
 
+func object_killed( _type ) :
+	if ( _type == 'base' ) :
+		current_game_speed = current_game_speed - 0.08
+		
+	if ( current_game_speed <= 0 ) :
+		current_game_speed = 0.01
+		
+func object_shooted( _type ) :
+	if ( _type == 'rocket' ) :
+		current_game_speed = current_game_speed - 0.1
+	if ( current_game_speed <= 0 ) :
+		current_game_speed = 0.01
+
 func _on_dying_timer_timeout() :
 	# Reseteamos posicion nave
 	var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
@@ -137,3 +154,9 @@ func _on_dying_timer_timeout() :
 
 func _on_fire_timer_timeout():
 	can_fire = true
+
+
+func _on_second_timer_timeout():
+	# Speed up if not max speed
+	if ( current_game_speed < game_speed ) :
+		current_game_speed += 0.02

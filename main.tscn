@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://yvyvoq7hhnjw"]
+[gd_scene load_steps=5 format=3 uid="uid://yvyvoq7hhnjw"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_i0fev"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_yijvu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txa3e"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74a5u"]
+bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_i0fev")
@@ -13,6 +19,7 @@ shadow_enabled = true
 sky_mode = 1
 
 [node name="StartScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -85,7 +92,25 @@ position = Vector2(188, 46)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_yijvu")
 
+[node name="Speed_Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 9.0
+offset_right = 320.0
+offset_bottom = 35.0
+text = "Speed: "
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 37.0
+offset_right = 553.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_txa3e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_74a5u")
+
 [node name="GameOverScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,10 +158,6 @@ theme_override_font_sizes/font_size = 24
 text = "Press ENTER to restart..."
 horizontal_alignment = 1
 
-[node name="DyingTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.482557, 0)
 metadata/_edit_lock_ = true
@@ -145,10 +166,19 @@ metadata/_edit_lock_ = true
 transform = Transform3D(-0.483764, 0.501474, -0.717284, -0.0407435, 0.805774, 0.59082, 0.87425, 0.315042, -0.369373, -1.5581, 1.15182, -0.460496)
 fov = 44.5706
 
+[node name="DyingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="FireTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
+[node name="SecondTimer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
 [connection signal="timeout" from="StartScreen/StartLabelTimer" to="." method="_on_start_label_timer_timeout"]
 [connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]
