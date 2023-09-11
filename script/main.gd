@@ -1,14 +1,18 @@
 extends Node
 
-var player_scene = load("res://player.tscn")
-var fire_scene   = load("res://fire.tscn")
-var fire_muro_particles = load("res://particles/fire1.tscn")
+var player_scene 		= preload("res://player.tscn")
+var fire_scene   		= preload("res://fire.tscn")
+var fire_muro_particles = preload("res://particles/fire1.tscn")
+var level 				= preload("res://niveles/nivel_1.tscn")
+
 var player
 var camera
 var current_level
+var current_level_num = 1
 var current_time : float
 var can_fire : bool = true
-const max_lives = 3
+
+var max_lives = 3
 var current_lives = 3
 
 var game_speed = 0.6
@@ -26,7 +30,7 @@ func _ready():
 func _process( _delta ):
 	$UI/Speed_Label.text = 'Speed: ' +  str(current_game_speed)
 	$UI/ProgressBar.value = current_game_speed / game_speed * 100
-		
+	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
 
 func _physics_process( delta ) :
 	# Move player and camera
@@ -41,7 +45,7 @@ func _unhandled_input( event ):
 	# En la pantalla de start
 	if $StartScreen.visible and ( event.is_action_pressed("ui_accept") || event.is_action_pressed( 'fire' ) ):
 		# Game begins
-		load_level( 1 )
+		start_game()
 		
 	# En la pantalla de Game Over
 	if $GameOverScreen.visible and ( event.is_action_pressed("ui_accept") || event.is_action_pressed( 'fire' ) ) :
@@ -58,15 +62,22 @@ func _unhandled_input( event ):
 		$GameOverScreen.visible = false
 		player.can_move = true
 
-func load_level( _which_one ):
-	# De momento siempre cargamos el nivel 1... (que bastante tenemos ya)
-	var level = load("res://nivel_1.tscn")
+func load_level( _which_one ) :
+	if ( current_level_num != _which_one ) :
+		var level = load("res://niveles/nivel_1.tscn")
+		
 	var level_instance = level.instantiate()
+	current_level = level_instance
+	current_level_num = _which_one
 	add_child( level_instance )
+	
+
+func start_game():
+	# De momento siempre cargamos el nivel 1... (que bastante tenemos ya)
+	load_level( 1 )
 	
 	$StartScreen.visible = false;
 	$UI.show()
-	current_level = level_instance
 	
 	# Añadimos jugador
 	player = player_scene.instantiate()
@@ -156,7 +167,12 @@ func _on_fire_timer_timeout():
 	can_fire = true
 
 
+# Speed up if not max speed
 func _on_second_timer_timeout():
-	# Speed up if not max speed
+	var minimum_acceleration = 0.1
+	
 	if ( current_game_speed < game_speed ) :
-		current_game_speed += 0.02
+		var new_speed = current_game_speed * 0.10 
+		if ( new_speed < 0.1 ) :
+			new_speed = 0.1
+		current_game_speed += new_speed

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c243ob6e5llcf"]
 
 [ext_resource type="PackedScene" uid="uid://7qgj022qq3do" path="res://models/craft_speederA.glb" id="1_o62nu"]
-[ext_resource type="Script" path="res://player.gd" id="1_okomd"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_urfw5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hpp1n"]
 size = Vector3(1.85141, 0.883651, 1.99162)
@@ -11,7 +11,7 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_okomd")
+script = ExtResource("1_urfw5")
 
 [node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -1.1, 0)

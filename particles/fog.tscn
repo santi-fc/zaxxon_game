@@ -19,20 +19,26 @@ gradient = SubResource("Gradient_67kr8")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xdxb6"]
 lifetime_randomness = 0.15
 direction = Vector3(0, 1, 0)
-spread = 10.76
+spread = 28.35
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 1.0
 angular_velocity_min = 1.0
 angular_velocity_max = 2.0
 angular_velocity_curve = SubResource("CurveTexture_8cx16")
+scale_min = 0.3
+color = Color(0.662745, 0.662745, 0.662745, 1)
 color_ramp = SubResource("GradientTexture1D_350bm")
+hue_variation_min = -1.0
+turbulence_enabled = true
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 0.71
+turbulence_noise_speed = Vector3(0, 7, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8sx81"]
 transparency = 1
 shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.388235, 0.388235, 0.388235, 0.129412)
+albedo_color = Color(0.8, 0.8, 0.8, 0.192157)
 
 [sub_resource type="SphereMesh" id="SphereMesh_klgkn"]
 lightmap_size_hint = Vector2i(17, 9)

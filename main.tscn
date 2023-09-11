@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://yvyvoq7hhnjw"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_i0fev"]
+[ext_resource type="Script" path="res://script/main.gd" id="1_3sbq1"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_yijvu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txa3e"]
@@ -10,7 +10,7 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
 
 [node name="Main" type="Node"]
-script = ExtResource("1_i0fev")
+script = ExtResource("1_3sbq1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.933236, -0.351455, -0.0744939, -0.0294446, -0.281478, 0.959116, -0.358055, -0.892888, -0.273034, 0, 4.29997, -2.35354)
@@ -75,7 +75,6 @@ autostart = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1024.0
-offset_bottom = 126.0
 
 [node name="vides_1" type="Sprite2D" parent="UI"]
 position = Vector2(44, 46)
@@ -108,6 +107,17 @@ offset_right = 553.0
 offset_bottom = 64.0
 theme_override_styles/background = SubResource("StyleBoxFlat_txa3e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_74a5u")
+
+[node name="FPS" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_bottom = 49.0
+grow_horizontal = 0
+text = "999 FPS"
+horizontal_alignment = 2
 
 [node name="GameOverScreen" type="Control" parent="."]
 visible = false

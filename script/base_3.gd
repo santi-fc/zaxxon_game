@@ -11,6 +11,6 @@ func _ready():
 func _process(delta):
 	pass
 	
-func fired()
+func fired():
 	hp--
 	

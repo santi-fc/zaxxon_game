@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://coeaopbbdy5a5"]
+
+[ext_resource type="Texture2D" uid="uid://d0wixquyvtc32" path="res://textures/nivel_1_suelo.png" id="1_fsrj3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_alcyu"]
+albedo_texture = ExtResource("1_fsrj3")
+uv1_scale = Vector3(0.02, 0.02, 0.02)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_qqi00"]
+material = SubResource("StandardMaterial3D_alcyu")
+size = Vector3(111, 0.1, 14)
+
+[node name="Nivel2" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.40567)
+lod_bias = 0.001
+mesh = SubResource("BoxMesh_qqi00")

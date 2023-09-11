@@ -17,14 +17,12 @@ func _physics_process( delta ) :
 	position.z += delta * speed 
 	if ( position.z - start_position_z >= max_distance ) :
 		hide()
-		queue_free()
+		#queue_free()
 
 
 func _on_body_entered( body ):
 	hide()
-	queue_free()
-	print(body)
+	#queue_free()
 	if body.is_in_group( 'enemigo' ) :
 		body.get_shoot()
-		pass
 
