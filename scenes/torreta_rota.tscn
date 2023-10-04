@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl051k1ldd8xw"]
+
+[ext_resource type="PackedScene" uid="uid://d12pof1twm54n" path="res://models/turret_single_broken.glb" id="1_212nm"]
+
+[node name="torreta_rota" type="StaticBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="turret_single_broken" parent="." instance=ExtResource("1_212nm")]

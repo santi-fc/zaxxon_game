@@ -38,13 +38,20 @@ func _physics_process( delta ):
 	if not moved :
 		rotation.z = 0
 	
-	
 	move_and_slide()
 		
 	for index in range(get_slide_collision_count()):
 		# We get one of the collisions with the player
 		var collision = get_slide_collision(index)
+		print( collision);
 		if ( collision.get_collider().is_in_group('nivel')) :
+			var explosion = get_node('boom')
+			explosion.show()
+			explosion.get_node('BoomParticle3D').one_shot = true
+			explosion.get_node('BoomParticle3D').waiting = false
+			explosion.get_node('BoomParticle3D').emitting = true
+			
+			get_node('Pivot').hide()
 			get_parent().lose_live()
 	
 	

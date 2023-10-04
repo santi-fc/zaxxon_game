@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvi0hcaqt6jcy"]
+
+[ext_resource type="PackedScene" uid="uid://dfhqeqdq5c4n8" path="res://models/hangar_roundA_broken.glb" id="1_eohkh"]
+
+[node name="base_rota" type="StaticBody3D"]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.0478337, 0, -0.0433407)
+
+[node name="hangar_roundA_broken" parent="." instance=ExtResource("1_eohkh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0168915, 0, 0.001719)

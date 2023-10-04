@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://yvyvoq7hhnjw"]
+[gd_scene load_steps=9 format=3 uid="uid://yvyvoq7hhnjw"]
 
-[ext_resource type="Script" path="res://script/main.gd" id="1_3sbq1"]
+[ext_resource type="Script" path="res://script/main.gd" id="1_ui604"]
+[ext_resource type="Script" path="res://SplashScreenGodot.gd" id="2_u16r4"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_yijvu"]
+[ext_resource type="Texture2D" uid="uid://cuplo0f5dh61d" path="res://images/splash_owner.png" id="3_xkwqp"]
+[ext_resource type="Texture2D" uid="uid://dyp18315kl42l" path="res://images/logo_condensed_dark.png" id="4_734cn"]
+[ext_resource type="Texture2D" uid="uid://516ed0lx321m" path="res://images/MainScreen.png" id="5_jh4u1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txa3e"]
 bg_color = Color(1, 1, 1, 1)
@@ -10,7 +14,7 @@ bg_color = Color(1, 1, 1, 1)
 bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
 
 [node name="Main" type="Node"]
-script = ExtResource("1_3sbq1")
+script = ExtResource("1_ui604")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.933236, -0.351455, -0.0744939, -0.0294446, -0.281478, 0.959116, -0.358055, -0.892888, -0.273034, 0, 4.29997, -2.35354)
@@ -18,7 +22,84 @@ light_energy = 2.0
 shadow_enabled = true
 sky_mode = 1
 
+[node name="SplashScreenGodot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_u16r4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Splash2" type="TextureRect" parent="SplashScreenGodot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_xkwqp")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="Splash1" type="TextureRect" parent="SplashScreenGodot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_734cn")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="WhitePage" type="ColorRect" parent="SplashScreenGodot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
 [node name="StartScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fondo" type="TextureRect" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_jh4u1")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Start" type="Label" parent="StartScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -259.0
+offset_top = -101.0
+offset_right = 259.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Pulsa cualquier tecla/botón para comenzar..."
+horizontal_alignment = 1
+
+[node name="UI" type="Control" parent="."]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -26,55 +107,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="StartScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Start" type="Label" parent="StartScreen"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 1.0
-offset_top = 36.0
-offset_right = 1.0
-offset_bottom = 78.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
-text = "Press ENTER to start..."
-horizontal_alignment = 1
-
-[node name="Title" type="Label" parent="StartScreen"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -267.0
-offset_bottom = -99.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 120
-text = "Zaxxon"
-horizontal_alignment = 1
-
-[node name="StartLabelTimer" type="Timer" parent="StartScreen"]
-wait_time = 0.5
-autostart = true
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 1024.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="vides_1" type="Sprite2D" parent="UI"]
 position = Vector2(44, 46)
@@ -97,7 +131,7 @@ offset_left = 264.0
 offset_top = 9.0
 offset_right = 320.0
 offset_bottom = 35.0
-text = "Speed: "
+text = "Speed "
 
 [node name="ProgressBar" type="ProgressBar" parent="UI"]
 layout_mode = 0
@@ -169,14 +203,17 @@ text = "Press ENTER to restart..."
 horizontal_alignment = 1
 
 [node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.482557, 0)
-metadata/_edit_lock_ = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(-0.483764, 0.501474, -0.717284, -0.0407435, 0.805774, 0.59082, 0.87425, 0.315042, -0.369373, -1.5581, 1.15182, -0.460496)
-fov = 44.5706
+fov = 44.0
 
 [node name="DyingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="EndGameTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
@@ -188,7 +225,7 @@ one_shot = true
 wait_time = 0.7
 autostart = true
 
-[connection signal="timeout" from="StartScreen/StartLabelTimer" to="." method="_on_start_label_timer_timeout"]
 [connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
+[connection signal="timeout" from="EndGameTimer" to="." method="_on_end_game_timer_timeout"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
 [connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]

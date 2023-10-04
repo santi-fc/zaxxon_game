@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://4rwe8qu40u2k"]
+[gd_scene load_steps=9 format=3 uid="uid://4rwe8qu40u2k"]
+
+[ext_resource type="Script" path="res://particles/fog.gd" id="1_xog66"]
 
 [sub_resource type="Curve" id="Curve_2hi5f"]
 min_value = -360.0
@@ -48,6 +50,7 @@ height = 0.2
 radial_segments = 42
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_xog66")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 17

@@ -1,6 +1,6 @@
 class_name Rocket extends StaticBody3D
 
-@export var health = 10
+@export var health = 4
 
 var fog_particles   = load("res://particles/fog.tscn")
 var rocket_speed_up = 0.006
@@ -17,7 +17,7 @@ func _process( delta ) :
 
 func _physics_process( delta ) :
 	# Calculamos distancia hasta jugador en eje Z
-	var player = get_parent().get_parent().get_parent().player
+	var player = get_parent().get_parent().player
 	
 	if ( player ) :
 		var player_position_z = player.global_transform.origin.z

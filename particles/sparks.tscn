@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlqvk32enjow0"]
+
+[ext_resource type="Script" path="res://particles/SparksParticles.gd" id="1_16h04"]
+
+[sub_resource type="Gradient" id="Gradient_s4bki"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 1, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e3gqh"]
+gradient = SubResource("Gradient_s4bki")
+
+[sub_resource type="Curve" id="Curve_ffgah"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.231481, 1), 0.0, 0.0, 0, 0, Vector2(0.518518, 0.989474), 0.0, 0.0, 0, 0, Vector2(0.987654, 0.0315789), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yc3wr"]
+curve = SubResource("Curve_ffgah")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8occl"]
+lifetime_randomness = 0.52
+particle_flag_align_y = true
+direction = Vector3(0, 0, -1)
+spread = 89.5
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 4.0
+scale_curve = SubResource("CurveTexture_yc3wr")
+color_ramp = SubResource("GradientTexture1D_e3gqh")
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwe4s"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_bab3w"]
+lightmap_size_hint = Vector2i(5, 11)
+material = SubResource("StandardMaterial3D_lwe4s")
+size = Vector3(0.01, 0.05, 0.01)
+
+[node name="sparks" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
+
+[node name="SparksParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 4
+lifetime = 0.2
+one_shot = true
+speed_scale = 0.4
+explosiveness = 1.0
+randomness = 1.0
+visibility_aabb = AABB(-27.8827, -14.2902, -20.807, 55.7653, 28.5804, 41.614)
+process_material = SubResource("ParticleProcessMaterial_8occl")
+draw_pass_1 = SubResource("BoxMesh_bab3w")
+script = ExtResource("1_16h04")
