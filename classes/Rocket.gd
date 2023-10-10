@@ -11,11 +11,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process( delta ) :
+func _process( _delta ) :
 	pass
 
 
-func _physics_process( delta ) :
+func _physics_process( _delta ) :
 	# Calculamos distancia hasta jugador en eje Z
 	var player = get_parent().get_parent().player
 	

@@ -1,6 +1,7 @@
 class_name ScenaryObject extends StaticBody3D
 
 @export var health = 3  # default health
+@export var can_fire = false
 
 var has_fog = false
 var fog_particles      = preload("res://particles/fog.tscn")

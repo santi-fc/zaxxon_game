@@ -54,6 +54,9 @@ func _physics_process( delta ) :
 		if ( current_time > 0.7 ) :
 			player.position.z += current_game_speed * delta
 	
+	if Input.is_action_pressed( 'Pausa' ) :
+		player.can_move = not player.can_move
+		
 func _unhandled_input( event ):
 	
 	if ( event is InputEventKey and event.pressed ) :
@@ -83,6 +86,8 @@ func _unhandled_input( event ):
 			camera.position.z = -2
 			$GameOverScreen.visible = false
 			player.can_move = true
+			
+	
 
 func start_game():
 	# De momento siempre cargamos el nivel 1... (que bastante tenemos ya)
@@ -113,7 +118,7 @@ func start_game():
 	
 func load_level( _which_one ) :
 	if ( current_level_num != _which_one ) :
-		var level = load("res://niveles/nivel_1.tscn")
+		level = load("res://niveles/nivel_1.tscn")
 		
 	var level_instance = level.instantiate()
 	current_level = level_instance
@@ -123,11 +128,12 @@ func load_level( _which_one ) :
 
 
 func show_start_screen() :
-	$SplashScreenGodot.visible = false
-	$GameOverScreen.visible    = false
-	$UI.visible                = false 
-	$StartScreen.visible       = true
-	blink_start_text()
+	if ( not $StartScreen.visible ) :
+		$SplashScreenGodot.visible = false
+		$GameOverScreen.visible    = false
+		$UI.visible                = false 
+		$StartScreen.visible       = true
+		blink_start_text()
 
 func blink_start_text() :
 	if ( $StartScreen.visible ) :
@@ -178,7 +184,7 @@ func object_killed( _type ) :
 		
 func object_shooted( _type ) :
 	if ( _type == 'rocket' ) :
-		current_game_speed = current_game_speed - 0.1
+		current_game_speed = current_game_speed - 0.20
 		
 	if ( current_game_speed <= 0 ) :
 		current_game_speed = 0.01
@@ -210,10 +216,11 @@ func _on_fire_timer_timeout():
 
 # Speed up if not max speed
 func _on_second_timer_timeout():
-	var minimum_acceleration = 0.1
-	
+
 	if ( current_game_speed < game_speed ) :
 		var new_speed = current_game_speed * 0.10 
 		if ( new_speed < 0.1 ) :
 			new_speed = 0.1
 		current_game_speed += new_speed
+		if ( current_game_speed > game_speed ) :
+			current_game_speed = game_speed

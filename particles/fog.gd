@@ -15,10 +15,11 @@ func _process(delta):
 		timer = timer + ( 1 * delta )
 		if ( timer > 3 ) :
 			particle_node.emitting = false
+		start_hide = false
 	
 	if not particle_node.is_emitting() :
 		if ( timer > 3 + particle_node.lifetime ) :
-			queue_free()
+			self.queue_free()
 
 
 func hide_slowly() :

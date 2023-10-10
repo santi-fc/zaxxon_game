@@ -64,6 +64,7 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="StartScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

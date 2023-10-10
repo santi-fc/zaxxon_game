@@ -13,7 +13,6 @@ func _physics_process( delta ):
 	if ( ! can_move ) :
 		return
 	
-	
 	if Input.is_action_pressed( 'move_right' ) && boundaries.right < position.x :
 		position.x -= movement_step_horizontal * delta
 		rotation.z = -movement_rotation * delta
@@ -43,7 +42,7 @@ func _physics_process( delta ):
 	for index in range(get_slide_collision_count()):
 		# We get one of the collisions with the player
 		var collision = get_slide_collision(index)
-		print( collision);
+		
 		if ( collision.get_collider().is_in_group('nivel')) :
 			var explosion = get_node('boom')
 			explosion.show()
@@ -53,7 +52,9 @@ func _physics_process( delta ):
 			
 			get_node('Pivot').hide()
 			get_parent().lose_live()
-	
+		
+		if ( collision.get_collider().is_in_group('level_end')) :
+			print('LEVEL END !!')
 	
 
 func initialize( params ) :

@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bh4lxpolqps6e"]
+[gd_scene load_steps=29 format=3 uid="uid://bh4lxpolqps6e"]
 
-[ext_resource type="Material" uid="uid://cxed1fhddei6n" path="res://materials/muro.tres" id="1_b6iyn"]
 [ext_resource type="Script" path="res://classes/WallObject.gd" id="2_x1gla"]
+[ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="3_dy06t"]
 [ext_resource type="Script" path="res://classes/ScenaryObject.gd" id="3_plusm"]
 [ext_resource type="PackedScene" uid="uid://cvw3yvc3lqkoj" path="res://models/hangar_roundA.glb" id="4_wbj2u"]
 [ext_resource type="PackedScene" uid="uid://dfhqeqdq5c4n8" path="res://models/hangar_roundA_broken.glb" id="5_2v4bd"]
@@ -12,6 +12,30 @@
 [ext_resource type="PackedScene" uid="uid://bfiqwdpt5ubsp" path="res://rocket.tscn" id="9_2t2c4"]
 [ext_resource type="Texture2D" uid="uid://d0wixquyvtc32" path="res://textures/nivel_1_suelo.png" id="10_lfqfw"]
 [ext_resource type="PackedScene" uid="uid://b4oo8qcbo5oqf" path="res://Blender/muro_1.blend" id="13_4l31g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tap73"]
+size = Vector3(1, 0.765012, 0.287548)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rsgl3"]
+size = Vector3(1, 0.165207, 0.179122)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3t21"]
+albedo_texture = ExtResource("3_dy06t")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lojjc"]
+material = SubResource("StandardMaterial3D_k3t21")
+size = Vector3(1, 0.165207, 0.179122)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rug2j"]
+size = Vector3(1.5, 0.422815, 0.179)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdrgd"]
+albedo_texture = ExtResource("3_dy06t")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7pn0v"]
+size = Vector3(1.5, 0.422815, 0.179)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6fyr"]
 albedo_texture = ExtResource("10_lfqfw")
@@ -41,8 +65,8 @@ size = Vector3(0.156517, 0.149219, 0.180634)
 [sub_resource type="BoxShape3D" id="BoxShape3D_uwyi7"]
 size = Vector3(1.69795, 3.64998, 1.84439)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tap73"]
-size = Vector3(1, 0.765012, 0.287548)
+[sub_resource type="BoxShape3D" id="BoxShape3D_pr31i"]
+size = Vector3(1.76221, 1, 1)
 
 [node name="Nivel" type="Node3D"]
 
@@ -51,38 +75,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.52753)
 use_collision = true
 collision_mask = 10
 
-[node name="muro_2" type="CSGBox3D" parent="." groups=["nivel", "wall"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.241569, 0.1402, 2.8861)
-use_collision = true
+[node name="Wall_ini" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973094, 0.324665, -0.128567)
 collision_mask = 10
-size = Vector3(1, 0.165207, 0.179122)
-material = ExtResource("1_b6iyn")
+script = ExtResource("2_x1gla")
 
-[node name="muro_3" type="CSGBox3D" parent="." groups=["nivel", "wall"]]
+[node name="muro_1" parent="Wall_ini" instance=ExtResource("13_4l31g")]
+transform = Transform3D(-0.709667, 0, -5.47276e-08, 0, 0.851557, 0, 6.2041e-08, 0, -0.62601, 0, -0.0560408, -0.0444825)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_ini"]
+transform = Transform3D(1.49294, 0, 0, 0, 0.621644, 0, 0, 0, 0.499454, 0, -0.1235, -0.0588926)
+shape = SubResource("BoxShape3D_tap73")
+
+[node name="Wall_end" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -0.00973094, 0.324665, 7.97758)
+collision_mask = 10
+script = ExtResource("2_x1gla")
+
+[node name="muro_1" parent="Wall_end" instance=ExtResource("13_4l31g")]
+transform = Transform3D(-0.709667, 0, -5.47276e-08, 0, 0.851557, 0, 6.2041e-08, 0, -0.62601, 0, -0.0560408, -0.0444825)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_end"]
+transform = Transform3D(1.49294, 0, 0, 0, 0.621644, 0, 0, 0, 0.499454, 0, -0.1235, -0.0588926)
+shape = SubResource("BoxShape3D_tap73")
+
+[node name="Wall_2" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.241569, 0.1402, 2.90157)
+collision_mask = 10
+script = ExtResource("2_x1gla")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_2"]
+shape = SubResource("BoxShape3D_rsgl3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall_2"]
+mesh = SubResource("BoxMesh_lojjc")
+
+[node name="Wall_3" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221554, 0.18729, 3.8989)
-use_collision = true
 collision_mask = 10
-size = Vector3(1, 0.259574, 0.179122)
-material = ExtResource("1_b6iyn")
 
-[node name="muro_4" type="CSGBox3D" parent="." groups=["nivel", "wall"]]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_3"]
+shape = SubResource("BoxShape3D_rug2j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall_3"]
+transform = Transform3D(0.68041, 0, 0, 0, 0.553081, 0, 0, 0, 0.919691, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_gdrgd")
+mesh = SubResource("BoxMesh_7pn0v")
+
+[node name="Wall_4" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00320978, 0.280964, 6.24217)
-use_collision = true
 collision_mask = 10
-size = Vector3(1.5, 0.422815, 0.179)
-material = ExtResource("1_b6iyn")
 
-[node name="muro_5" type="CSGBox3D" parent="." groups=["nivel", "wall"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00320978, 0.404632, 8.16249)
-use_collision = true
-collision_mask = 10
-size = Vector3(1.5, 0.714802, 0.179)
-material = ExtResource("1_b6iyn")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_4"]
+shape = SubResource("BoxShape3D_rug2j")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="muro_5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.266347, 0)
-operation = 2
-size = Vector3(1.0299, 0.401385, 0.179)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall_4"]
+material_override = SubResource("StandardMaterial3D_gdrgd")
+mesh = SubResource("BoxMesh_7pn0v")
 
 [node name="Suelo" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.00104704, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00104704, 0, 0, 6.265)
@@ -255,6 +304,7 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.04993, 0.221441, -2.
 [node name="torreta_1" type="StaticBody3D" parent="." groups=["enemigo", "nivel", "torreta"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.55244)
 script = ExtResource("3_plusm")
+can_fire = true
 
 [node name="turret_single" parent="torreta_1" instance=ExtResource("6_6fbie")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.102938, 0.0602202, -2.97899)
@@ -331,6 +381,7 @@ shape = SubResource("BoxShape3D_wmft1")
 
 [node name="RocketCombo" type="StaticBody3D" parent="." groups=["enemigo", "rocket"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111098, 0, 6.20303)
+collision_mask = 10
 script = ExtResource("7_csxr1")
 
 [node name="Crater" parent="RocketCombo" instance=ExtResource("8_75sp2")]
@@ -345,6 +396,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9952, -3.10277, -1.54763)
 
 [node name="RocketCombo2" type="StaticBody3D" parent="." groups=["enemigo", "rocket"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02953, 0, 9.31404)
+collision_mask = 10
 script = ExtResource("7_csxr1")
 
 [node name="Crater" parent="RocketCombo2" instance=ExtResource("8_75sp2")]
@@ -359,6 +411,7 @@ shape = SubResource("BoxShape3D_uwyi7")
 
 [node name="RocketCombo3" type="StaticBody3D" parent="." groups=["enemigo", "rocket"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473614, 0, 9.31404)
+collision_mask = 10
 script = ExtResource("7_csxr1")
 
 [node name="Crater" parent="RocketCombo3" instance=ExtResource("8_75sp2")]
@@ -373,6 +426,7 @@ shape = SubResource("BoxShape3D_uwyi7")
 
 [node name="RocketCombo4" type="StaticBody3D" parent="." groups=["enemigo", "rocket"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105021, 0, 9.31404)
+collision_mask = 10
 script = ExtResource("7_csxr1")
 
 [node name="Crater" parent="RocketCombo4" instance=ExtResource("8_75sp2")]
@@ -385,14 +439,10 @@ shape = SubResource("BoxShape3D_uwyi7")
 [node name="RocketModel" parent="RocketCombo4/Rocket" instance=ExtResource("9_2t2c4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9952, -3.10277, -1.54762)
 
-[node name="Wall_initial" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973094, 0.324665, -0.128567)
-collision_mask = 10
-script = ExtResource("2_x1gla")
+[node name="Level_End" type="StaticBody3D" parent="." groups=["level_end"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+collision_mask = 2
 
-[node name="muro_1" parent="Wall_initial" instance=ExtResource("13_4l31g")]
-transform = Transform3D(-0.709667, 0, -5.47276e-08, 0, 0.851557, 0, 6.2041e-08, 0, -0.62601, 0, -0.0560408, -0.0444825)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_initial"]
-transform = Transform3D(1.49294, 0, 0, 0, 0.621644, 0, 0, 0, 0.499454, 0, -0.1235, -0.0588926)
-shape = SubResource("BoxShape3D_tap73")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level_End" groups=["level_end"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0934448, 0, -0.591675)
+shape = SubResource("BoxShape3D_pr31i")
