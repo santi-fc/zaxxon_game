@@ -1,8 +1,8 @@
 extends Node
 
-var player_scene 		= preload("res://player.tscn")
-var fire_scene   		= preload("res://fire.tscn")
-
+var player_scene 		= preload("res://scenes/player.tscn")
+var fire_scene   		= preload("res://scenes/fire.tscn")
+var fire_enemy_scene    = preload("res://scenes/fire_red.tscn")
 var level 				= preload("res://niveles/nivel_1.tscn")
 
 var player
@@ -29,6 +29,7 @@ func _ready():
 	$StartScreen.visible    = false
 	$UI.visible             = false
 	$GameOverScreen.visible = false
+	$LevelComplete.visible  = false
 	# DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 	
 	await get_tree().create_timer(1.0).timeout
@@ -151,6 +152,12 @@ func make_fire() :
 		fire.position = player.position
 		add_child( fire )
 		
+func make_enemy_fire( _object_name ) :
+	var firing_object = current_level.get_node( str( _object_name ) )
+	var firing = fire_enemy_scene.instantiate()
+	firing.is_enemy_fire = true
+	firing.global_position = firing_object.global_position
+	current_level.add_child( firing )
 		
 func lose_live() :
 	# Paramos todo
@@ -207,7 +214,12 @@ func _on_dying_timer_timeout() :
 	
 	# Habilitamos movimiento
 	player.can_move = true
+
+func level_finished() :
+	$LevelComplete.visible = true
+	await get_tree().create_timer(5.0).timeout
 	
+
 func _on_end_game_timer_timeout():
 	$GameOverScreen.visible = true
 

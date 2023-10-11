@@ -3,6 +3,7 @@ extends Node3D
 var start_position_z = 0;
 var max_distance     = 4
 var speed            = 3
+var is_enemy_fire    = false
 
 signal fire_ended;
 
@@ -15,10 +16,17 @@ func _physics_process( delta ) :
 	if ( start_position_z == 0 ) :
 		start_position_z = position.z
 	
-	position.z += speed  * delta
-	if ( position.z - start_position_z >= max_distance ) :
-		hide()
-		#queue_free()
+	if ( is_enemy_fire ) :
+		position.z -= speed  * delta
+		if ( position.z + start_position_z <= max_distance ) :
+			hide()
+			queue_free()
+	else :
+		position.z += speed  * delta
+		if ( position.z - start_position_z >= max_distance ) :
+			hide()
+			queue_free()
+		
 
 func _on_body_entered( body ):
 	

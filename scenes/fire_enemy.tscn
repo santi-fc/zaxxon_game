@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceodwwd54dkr5"]
+
+[ext_resource type="Script" path="res://script/fire.gd" id="1_pcb2y"]
+[ext_resource type="PackedScene" uid="uid://dlqvk32enjow0" path="res://particles/sparks.tscn" id="2_tdqdk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hukro"]
+lightmap_size_hint = Vector2i(9, 12)
+size = Vector3(0.1, 0.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4d78n"]
+transparency = 1
+albedo_color = Color(0.905882, 0, 0, 0.615686)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 100.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1y2r"]
+size = Vector3(0.118518, 0.0964322, 0.988686)
+
+[node name="Fire" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000754239, 0, -0.0227533)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_pcb2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hukro")
+surface_material_override/0 = SubResource("StandardMaterial3D_4d78n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0245559)
+shape = SubResource("BoxShape3D_s1y2r")
+
+[node name="sparks" parent="." instance=ExtResource("2_tdqdk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.54961, 0, 0, -0.136808)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="fire_ended" from="." to="." method="_on_fire_ended"]

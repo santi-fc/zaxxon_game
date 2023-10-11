@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yvyvoq7hhnjw"]
+[gd_scene load_steps=10 format=3 uid="uid://yvyvoq7hhnjw"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_ui604"]
 [ext_resource type="Script" path="res://SplashScreenGodot.gd" id="2_u16r4"]
@@ -13,6 +13,9 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_74a5u"]
 bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
 
+[sub_resource type="Theme" id="Theme_80aqn"]
+default_font_size = 36
+
 [node name="Main" type="Node"]
 script = ExtResource("1_ui604")
 
@@ -23,6 +26,7 @@ shadow_enabled = true
 sky_mode = 1
 
 [node name="SplashScreenGodot" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,6 +206,31 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Press ENTER to restart..."
 horizontal_alignment = 1
+
+[node name="LevelComplete" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="LevelComplete"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -115.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_80aqn")
+text = "Level Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483, 0)

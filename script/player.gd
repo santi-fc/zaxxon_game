@@ -54,7 +54,7 @@ func _physics_process( delta ):
 			get_parent().lose_live()
 		
 		if ( collision.get_collider().is_in_group('level_end')) :
-			print('LEVEL END !!')
+			get_parent().level_finished()
 	
 
 func initialize( params ) :

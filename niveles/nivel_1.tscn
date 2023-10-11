@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bh4lxpolqps6e"]
+[gd_scene load_steps=31 format=3 uid="uid://bh4lxpolqps6e"]
 
 [ext_resource type="Script" path="res://classes/WallObject.gd" id="2_x1gla"]
 [ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="3_dy06t"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://classes/Rocket.gd" id="7_csxr1"]
 [ext_resource type="PackedScene" uid="uid://dlj38d2cuhfox" path="res://models/craterLarge.glb" id="8_75sp2"]
 [ext_resource type="PackedScene" uid="uid://bfiqwdpt5ubsp" path="res://rocket.tscn" id="9_2t2c4"]
+[ext_resource type="PackedScene" uid="uid://bddpbbg81wiy1" path="res://models/turret_single_fixed.glb" id="9_siocq"]
 [ext_resource type="Texture2D" uid="uid://d0wixquyvtc32" path="res://textures/nivel_1_suelo.png" id="10_lfqfw"]
 [ext_resource type="PackedScene" uid="uid://b4oo8qcbo5oqf" path="res://Blender/muro_1.blend" id="13_4l31g"]
 
@@ -59,6 +60,9 @@ size = Vector3(0.239529, 0.125696, 0.217966)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fbg6f"]
 size = Vector3(0.168769, 0.121267, 0.156021)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_juooy"]
+size = Vector3(0.704872, 1, 0.713308)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wmft1"]
 size = Vector3(0.156517, 0.149219, 0.180634)
 
@@ -69,11 +73,6 @@ size = Vector3(1.69795, 3.64998, 1.84439)
 size = Vector3(1.76221, 1, 1)
 
 [node name="Nivel" type="Node3D"]
-
-[node name="Nivel" type="CSGCombiner3D" parent="." groups=["nivel"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.52753)
-use_collision = true
-collision_mask = 10
 
 [node name="Wall_ini" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973094, 0.324665, -0.128567)
@@ -302,16 +301,16 @@ shape = SubResource("BoxShape3D_fbg6f")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.04993, 0.221441, -2.95323)
 
 [node name="torreta_1" type="StaticBody3D" parent="." groups=["enemigo", "nivel", "torreta"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.55244)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.533752, 0.0301514, 2.90205)
 script = ExtResource("3_plusm")
 can_fire = true
 
-[node name="turret_single" parent="torreta_1" instance=ExtResource("6_6fbie")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.102938, 0.0602202, -2.97899)
+[node name="turret_single_fixed" parent="torreta_1" instance=ExtResource("9_siocq")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="torreta_1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.503955, 0.127658, -2.6808)
-shape = SubResource("BoxShape3D_wmft1")
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0794067, 0)
+shape = SubResource("BoxShape3D_juooy")
 
 [node name="torreta_4" type="StaticBody3D" parent="." groups=["enemigo", "nivel"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.437447, 8.92695)
@@ -441,6 +440,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9952, -3.10277, -1.54762)
 
 [node name="Level_End" type="StaticBody3D" parent="." groups=["level_end"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level_End" groups=["level_end"]]

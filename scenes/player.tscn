@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c243ob6e5llcf"]
+
+[ext_resource type="PackedScene" uid="uid://7qgj022qq3do" path="res://models/craft_speederA.glb" id="1_o62nu"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_urfw5"]
+[ext_resource type="PackedScene" uid="uid://vngahy24hl45" path="res://particles/boom.tscn" id="3_jfp3m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hpp1n"]
+size = Vector3(1.85141, 0.883651, 1.99162)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_urfw5")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, -1.1, 0)
+
+[node name="craft_speederA" parent="Pivot" instance=ExtResource("1_o62nu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.21109, 1.10613, -1.67681)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256636, 0.354617, -0.254803)
+shape = SubResource("BoxShape3D_hpp1n")
+
+[node name="boom" parent="." instance=ExtResource("3_jfp3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686756, 0.796443, -0.129771)
+visible = false

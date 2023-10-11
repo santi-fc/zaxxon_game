@@ -8,17 +8,29 @@ var fog_particles      = preload("res://particles/fog.tscn")
 var boom_particle 	   = preload("res://particles/boom.tscn")
 var base_rota_scene    = preload("res://scenes/base_rota.tscn")
 var torreta_rota_scene = preload("res://scenes/torreta_rota.tscn")
+var object_name = '';
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
+	self.object_name = 'scenary_object_' + str( randf() * 999999939 )
+	if ( can_fire ) :
+		await get_tree().create_timer( 2 ).timeout 
+		check_if_shoot()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
 
+func check_if_shoot() :
+	randomize()
+	var random_number = randf() * 10
+	if ( random_number > 0 ):
+		get_node("/root/Main").make_enemy_fire( self.name )
+		
+	await get_tree().create_timer( 2 ).timeout 
+	check_if_shoot()
+	
 func get_shoot() :
 	health = health - 1
 	if ( ! has_fog ) :
@@ -28,8 +40,8 @@ func get_shoot() :
 		add_child( has_fog )
 		
 	if ( health <= 0 ) :
-		var object_name = get_object_type()
-		get_node("/root/Main").object_killed( object_name )
+		var _object_name = get_object_type()
+		get_node("/root/Main").object_killed( _object_name )
 		
 		# Quitamos collider y mesh 
 		for _i in self.get_children () :
