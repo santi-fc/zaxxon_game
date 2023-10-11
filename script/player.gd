@@ -10,24 +10,24 @@ var boundaries = { 'left' : 0, 'right' : 0, 'top' : 0, 'bottom' : 0 }
 func _physics_process( delta ):
 	
 	var moved = false;
-	if ( ! can_move ) :
+	if not can_move :
 		return
 	
-	if Input.is_action_pressed( 'move_right' ) && boundaries.right < position.x :
+	if Input.is_action_pressed( 'move_right' ) and boundaries.right < position.x :
 		position.x -= movement_step_horizontal * delta
 		rotation.z = -movement_rotation * delta
 		moved = true
 	
-	if Input.is_action_pressed( 'move_left' ) && boundaries.left > position.x :
+	if Input.is_action_pressed( 'move_left' ) and boundaries.left > position.x :
 		position.x += movement_step_horizontal * delta
 		rotation.z = movement_rotation * delta
 		moved = true
 
-	if Input.is_action_pressed( 'move_up' ) && boundaries.top > position.y :
+	if Input.is_action_pressed( 'move_up' ) and boundaries.top > position.y :
 		position.y += movement_step_vertical * delta
 		moved = true
 		
-	if Input.is_action_pressed( 'move_down' ) && boundaries.bottom < position.y :
+	if Input.is_action_pressed( 'move_down' ) and boundaries.bottom < position.y :
 		position.y -= movement_step_vertical * delta
 		moved = true
 		
@@ -43,7 +43,7 @@ func _physics_process( delta ):
 		# We get one of the collisions with the player
 		var collision = get_slide_collision(index)
 		
-		if ( collision.get_collider().is_in_group('nivel')) :
+		if collision.get_collider().is_in_group('nivel'):
 			var explosion = get_node('boom')
 			explosion.show()
 			explosion.get_node('BoomParticle3D').one_shot = true
@@ -53,10 +53,14 @@ func _physics_process( delta ):
 			get_node('Pivot').hide()
 			get_parent().lose_live()
 		
-		if ( collision.get_collider().is_in_group('level_end')) :
+		if collision.get_collider().is_in_group('level_end') :
 			get_parent().level_finished()
 	
 
+func reset():
+	get_node('Pivot').show()
+	visible = true
+
 func initialize( params ) :
-	if ( params.level_boundaries ) :
+	if params.level_boundaries :
 		boundaries = params.level_boundaries

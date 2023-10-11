@@ -2,7 +2,7 @@ class_name Rocket extends StaticBody3D
 
 @export var health = 4
 
-var fog_particles   = load("res://particles/fog.tscn")
+var fog_particles   = preload("res://particles/fog.tscn")
 var rocket_speed_up = 0.006
 
 # Called when the node enters the scene tree for the first time.
@@ -11,19 +11,19 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process( _delta ) :
+func _process(_delta):
 	pass
 
 
-func _physics_process( _delta ) :
+func _physics_process(_delta):
 	# Calculamos distancia hasta jugador en eje Z
 	var player = get_parent().get_parent().player
 	
-	if ( player ) :
+	if player :
 		var player_position_z = player.global_transform.origin.z
 		var rocket_position_z = global_transform.origin.z
 		var distance = rocket_position_z - player_position_z
-		if ( distance <= 4 ) :
+		if distance <= 4 :
 			$Rocket.position.y = $Rocket.position.y + rocket_speed_up
 			
 func get_shoot() :
@@ -34,7 +34,7 @@ func get_shoot() :
 	rocket_speed_up -= 0.0005
 	get_node("/root/Main").object_shooted('rocket')
 		
-	if ( health == 0 ) :
+	if health == 0 :
 		get_node("/root/Main").object_killed('rocket')
 		hide()
 		#remove_child(self)

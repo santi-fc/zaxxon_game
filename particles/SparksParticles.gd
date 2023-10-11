@@ -13,10 +13,10 @@ func _ready():
 func _process(_delta):
 	
 	# Particle animation starts
-	if ( not animation_started and emitting ) :
+	if not animation_started and emitting :
 		animation_started = true
 		
 	# Particle animation ends
-	if ( animation_started and not emitting ) :
+	if animation_started and not emitting :
 		get_parent().get_parent().fire_ended.emit()
 	

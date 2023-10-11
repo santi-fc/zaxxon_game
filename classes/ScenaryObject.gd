@@ -13,7 +13,7 @@ var object_name = '';
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.object_name = 'scenary_object_' + str( randf() * 999999939 )
-	if ( can_fire ) :
+	if can_fire :
 		await get_tree().create_timer( 2 ).timeout 
 		check_if_shoot()
 	
@@ -25,7 +25,7 @@ func _process(_delta):
 func check_if_shoot() :
 	randomize()
 	var random_number = randf() * 10
-	if ( random_number > 0 ):
+	if random_number > 0 :
 		get_node("/root/Main").make_enemy_fire( self.name )
 		
 	await get_tree().create_timer( 2 ).timeout 
@@ -33,21 +33,21 @@ func check_if_shoot() :
 	
 func get_shoot() :
 	health = health - 1
-	if ( ! has_fog ) :
+	if not has_fog :
 		has_fog = fog_particles.instantiate()
 		has_fog.position = get_node( 'CollisionShape3D' ).position
 		has_fog.name = 'fog';
 		add_child( has_fog )
 		
-	if ( health <= 0 ) :
+	if health <= 0 :
 		var _object_name = get_object_type()
 		get_node("/root/Main").object_killed( _object_name )
 		
 		# Quitamos collider y mesh 
 		for _i in self.get_children () :
-			if ( ( _i.name != 'fog' ) && ( _i.name != 'broken' ) ): 
+			if  _i.name != 'fog' and _i.name != 'broken' : 
 				_i.queue_free()
-		
+
 		# Añadimos explosion
 		var boom = boom_particle.instantiate()
 		var amount_gap = [50,200]
@@ -55,9 +55,8 @@ func get_shoot() :
 		boom.get_node('BoomParticle3D').amount = amount_gap[ randi() % amount_gap.size() ]
 		boom.get_node('BoomParticle3D').one_shot = true
 		add_child(boom)
-		
+
 		get_node( 'fog' ).hide_slowly()
-	
 
 
 		
@@ -68,15 +67,15 @@ func get_shoot() :
 			#base_rota.position = has_fog.position - Vector3(0.008,0.04,0.03)
 			#add_child( base_rota )
 		
-		if ( object_name == 'torreta' ) :
+		if object_name == 'torreta' :
 			var torreta_rota = torreta_rota_scene.instantiate()
 			torreta_rota.position = has_fog.position - Vector3(0,0.1,0)
 			add_child( torreta_rota )
 			
 func get_object_type() :
-	if ( is_in_group( 'base' )) : 
+	if is_in_group( 'base' ): 
 		return 'base'
-	if ( is_in_group( 'satelite' )) :
+	if is_in_group( 'satelite' ):
 		return 'satelite'
-	if ( is_in_group( 'torreta' )) :
+	if is_in_group( 'torreta' ) :
 		return 'torreta'

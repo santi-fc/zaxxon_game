@@ -31,6 +31,7 @@ shape = SubResource("BoxShape3D_s1y2r")
 
 [node name="sparks" parent="." instance=ExtResource("2_3fyph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.54961, 0, 0, -0.136808)
+visible = false
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="fire_ended" from="." to="." method="_on_fire_ended"]
