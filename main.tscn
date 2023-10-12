@@ -1,10 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://yvyvoq7hhnjw"]
+[gd_scene load_steps=7 format=3 uid="uid://yvyvoq7hhnjw"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_ui604"]
-[ext_resource type="Script" path="res://SplashScreenGodot.gd" id="2_u16r4"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_yijvu"]
-[ext_resource type="Texture2D" uid="uid://cuplo0f5dh61d" path="res://images/splash_owner.png" id="3_xkwqp"]
-[ext_resource type="Texture2D" uid="uid://dyp18315kl42l" path="res://images/logo_condensed_dark.png" id="4_734cn"]
 [ext_resource type="Texture2D" uid="uid://516ed0lx321m" path="res://images/MainScreen.png" id="5_jh4u1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txa3e"]
@@ -24,48 +21,6 @@ transform = Transform3D(0.933236, -0.351455, -0.0744939, -0.0294446, -0.281478, 
 light_energy = 2.0
 shadow_enabled = true
 sky_mode = 1
-
-[node name="SplashScreenGodot" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_u16r4")
-metadata/_edit_use_anchors_ = true
-
-[node name="Splash2" type="TextureRect" parent="SplashScreenGodot"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_xkwqp")
-expand_mode = 2
-stretch_mode = 6
-
-[node name="Splash1" type="TextureRect" parent="SplashScreenGodot"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_734cn")
-expand_mode = 2
-stretch_mode = 6
-
-[node name="WhitePage" type="ColorRect" parent="SplashScreenGodot"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="StartScreen" type="Control" parent="."]
 visible = false
