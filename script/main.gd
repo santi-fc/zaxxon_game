@@ -25,49 +25,33 @@ func _process( _delta ):
 		$UI/ProgressBar.value = current_game_speed / game_speed * 100
 		$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
 
+
 func _ready():
-	$StartScreen.visible = false
+	$StartScreen.visible = true
 	$UI.visible = false
 	$GameOverScreen.visible = false
 	$LevelComplete.visible = false
-	# DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
-	
-	await get_tree().create_timer(1.0).timeout
-	if ( ! $UI.visible ) :
-		$SplashScreenGodot.visible = true
-		$SplashScreenGodot.start()
-		$SplashScreenGodot.splash_screen_ended.connect( _on_splash_screen_ended )
-	
+	# GLOBALS.maximize_window()
+	blink_start_text()
 
-func _on_splash_screen_ended():
-	$SplashScreenGodot.visible = false
-	# Process can arrive here and be already playing... we checked it
-	if not $UI.visible :
-		show_start_screen()
 
 func _physics_process( delta ) :
-	# Move player and camera
+
 	current_time += delta
-	#if ( current_time > 1.5 ) :
-	#	return
 	if player and player.can_move :
 		camera.position.z += current_game_speed * delta
-		if ( current_time > 0.7 ) :
+		if current_time > 0.7 :
 			player.position.z += current_game_speed * delta
 	
 	if Input.is_action_pressed( 'Pausa' ) :
 		player.can_move = not player.can_move
-		
+
+
 func _unhandled_input( event ):
 	
 	if not ( event is InputEventKey and event.pressed ) :
 		return
 		
-	# Si estamos en la parte de splash pasamos a la ventana de start
-	if $SplashScreenGodot.visible :
-		_on_splash_screen_ended()
-		return
-	
 	# En la pantalla de start
 	if $StartScreen.visible :
 		# Game begins
@@ -129,13 +113,6 @@ func load_level( _which_one ) :
 	current_level_num = _which_one
 	add_child( level_instance )
 
-func show_start_screen() :
-	if not $StartScreen.visible :
-		$SplashScreenGodot.visible = false
-		$GameOverScreen.visible = false
-		$UI.visible = false 
-		$StartScreen.visible = true
-		blink_start_text()
 
 func blink_start_text() :
 	if $StartScreen.visible :

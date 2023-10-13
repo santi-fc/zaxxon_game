@@ -1,24 +1,18 @@
 extends Control
 
-var fade_in : bool   = false
-var fade_out : bool  = false
+var fade_in : bool = false
+var fade_out : bool = false
 
-var fade_duration  : float = 2.0
-var waiting_time   : float = 2.0
+var fade_duration : float = 2.0
+var waiting_time : float = 2.0
 var current_splash : int = 0
 
-signal splash_screen_ended
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-	
-
-func start() :
+func _ready() :
 	show_next_splash()
 
+
 func _process( delta ) :
-	
 	if not visible :
 		return;
 
@@ -33,6 +27,7 @@ func _process( delta ) :
 		$WhitePage.color[ 3 ] -= fade_duration * delta
 		if current_alpha <= 0 :
 			fade_out = false
+
 
 func show_next_splash() :
 	var prev_node = get_node_or_null( 'Splash' + str( current_splash ) )
@@ -55,7 +50,8 @@ func show_next_splash() :
 		current_splash = current_splash + 1
 		show_next_splash()
 	else :
-		splash_screen_ended.emit()
+		GLOBAL.goto_scene( GLOBAL.SCENE_MAIN_PATH )
+
 
 func pass_fast() :
 	fade_duration = 1
@@ -64,6 +60,14 @@ func pass_fast() :
 func show_white_page() :
 	fade_in = true
 
+
 func hide_white_page() :
 	fade_out = true
 
+
+func _unhandled_input( event ):
+	
+	if not ( event is InputEventKey and event.pressed ) :
+		return
+
+	GLOBAL.goto_scene( GLOBAL.SCENE_MAIN_PATH )
