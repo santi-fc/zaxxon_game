@@ -1,134 +1,62 @@
-extends Node
+extends Node3D
 
-var player_scene 		= preload("res://scenes/player.tscn")
 var fire_scene   		= preload("res://scenes/fire.tscn")
 var fire_enemy_scene    = preload("res://scenes/fire_red.tscn")
-var level 				= preload("res://niveles/nivel_1.tscn")
 
 var player
 var camera
 var current_level
 var current_level_num = 1
 var current_time : float
-var can_fire : bool = true
 
-var max_lives = 3
-var current_lives = 3
-
-var game_speed = 0.6
-var current_game_speed = 0.6
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process( _delta ):
-	if $UI.visible: 
-		$UI/ProgressBar.value = current_game_speed / game_speed * 100
-		$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
-
+var player_initial_position : Vector3
+var camera_initial_position : Vector3
 
 func _ready():
-	$StartScreen.visible = true
-	$UI.visible = false
-	$GameOverScreen.visible = false
-	$LevelComplete.visible = false
-	# GLOBALS.maximize_window()
-	blink_start_text()
+	$LevelComplete.hide()
+	GLOBAL.player = get_node( 'Player' )
+	start_game()
+
+
+func _process( _delta ):
+	if $UI.visible: 
+		show_fps()
+		update_speed_bar()
 
 
 func _physics_process( delta ) :
-
 	current_time += delta
-	if player and player.can_move :
-		camera.position.z += current_game_speed * delta
+	if GLOBAL.level_moving :
+		camera.position.z += GLOBAL.current_game_speed * delta
 		if current_time > 0.7 :
-			player.position.z += current_game_speed * delta
+			GLOBAL.player.position.z += GLOBAL.current_game_speed * delta
 	
 	if Input.is_action_pressed( 'Pausa' ) :
-		player.can_move = not player.can_move
+		GLOBAL.level_moving = not GLOBAL.level_moving 
 
-
-func _unhandled_input( event ):
-	
-	if not ( event is InputEventKey and event.pressed ) :
-		return
-		
-	# En la pantalla de start
-	if $StartScreen.visible :
-		# Game begins
-		start_game()
-		return
-		
-	# En la pantalla de Game Over
-	var keep_on_pressed = event.is_action_pressed("ui_accept") or event.is_action_pressed( 'fire' )
-	if $GameOverScreen.visible and keep_on_pressed :
-		# Game restarts
-		current_lives = 3
-		update_lives()
-		
-		# TODO : Calcular esto
-		var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
-		player.position =  Vector3( ( level_boundaries.left + level_boundaries.right ) / 2, 
-									( level_boundaries.top - level_boundaries.bottom ) / 2 , 
-									-2 )
-		camera.position.z = -2
-		$GameOverScreen.visible = false
-		player.can_move = true
-		player.reset()
-			
-	
 
 func start_game():
-	# De momento siempre cargamos el nivel 1... (que bastante tenemos ya)
-	load_level( 1 )
-	
-	$StartScreen.visible = false;
 	$UI.show()
-	
-	# Añadimos jugador
-	player = player_scene.instantiate()
-	
 	camera = get_node("CameraPivot");
-	var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
-	
-	# Lo ponemos mirando a donde toca
-	player.rotation.y = PI
-	
-	# Lo centramos
-	# TODO : Calcular esto
-	player.position =  Vector3( ( level_boundaries.left + level_boundaries.right ) / 2, 
-								( level_boundaries.top - level_boundaries.bottom ) / 2 , 
-								-2 )
 	camera.position.z = -2
-	
-	
-	player.initialize({ 'level_boundaries' : level_boundaries })
-	add_child( player )
-	
-func load_level( _which_one ) :
-	if current_level_num != _which_one :
-		level = load("res://niveles/nivel_1.tscn")
-
-	var level_instance = level.instantiate()
-	current_level = level_instance
-	current_level_num = _which_one
-	add_child( level_instance )
-
-
-func blink_start_text() :
-	if $StartScreen.visible :
-		$StartScreen/Start.visible = ! $StartScreen/Start.visible
-		await get_tree().create_timer( 0.6 ).timeout 
-		blink_start_text()
+	GLOBAL.level_moving = true
+	player_initial_position = GLOBAL.player.position
+	camera_initial_position = camera.position
 
 
 func make_fire() :
-	if can_fire :
-		can_fire = false
+	if GLOBAL.player_can_fire :
+		GLOBAL.player_can_fire = false
 		$FireTimer.start()
 
 		var fire = fire_scene.instantiate()
-		fire.position = player.position
+		fire.position = GLOBAL.player.position
 		add_child( fire )
+
+
+func _on_fire_timer_timeout():
+	GLOBAL.player_can_fire = true
+
 
 func make_enemy_fire( _object_name ) :
 	var firing_object = current_level.get_node( str( _object_name ) )
@@ -137,62 +65,64 @@ func make_enemy_fire( _object_name ) :
 	firing.global_position = firing_object.global_position
 	current_level.add_child( firing )
 
-func lose_live() :
-	# Paramos todo
-	player.can_move = false
 
-	if current_lives > 0 :
-		current_lives = current_lives - 1
+func player_crashed() :
+	GLOBAL.level_moving = false
+
+	if GLOBAL.current_lives > 0 :
+		GLOBAL.current_lives = GLOBAL.current_lives - 1
 		update_lives()
 		$DyingTimer.start()
 
-	if current_lives == 0 :
+	if GLOBAL.current_lives == 0 :
 		$EndGameTimer.start()
 		$DyingTimer.stop()
 
 
+func _on_dying_timer_timeout():
+
+	GLOBAL.player.position =  player_initial_position
+	camera.position = camera_initial_position
+	
+	# Habilitamos movimiento
+	GLOBAL.level_moving = true
+	
+	GLOBAL.player.get_node('Pivot').show()
+
+	# Reseteamos nivel :)
+#	load_level( current_level_num )
+#	player.get_node('Pivot').show()
+#
+#	player.get_node('boom/BoomParticle3D').show()
+#	player.get_node('boom/BoomParticle3D').waiting = false
+#	player.get_node('boom').show()
+#
+
+
 func update_lives():
-	for i in range( max_lives  ):
+	for i in range( GLOBAL.max_lives ):
 		var live_counter = i + 1 
-		if live_counter <= current_lives :
+		if live_counter <= GLOBAL.current_lives :
 			get_node( "UI/vides_" + str( live_counter )  ).show()
 		else:
 			get_node( "UI/vides_" + str( live_counter ) ).hide()
 
+
 func object_killed( _type ):
 	if _type == 'base' :
-		current_game_speed = current_game_speed - 0.20
+		GLOBAL.current_game_speed = GLOBAL.current_game_speed - 0.20
 		
-	if current_game_speed <= 0 :
-		current_game_speed = 0.01
-		
+	if GLOBAL.current_game_speed <= 0 :
+		GLOBAL.current_game_speed = 0.01
+
+
 func object_shooted( _type ):
 	if _type == 'rocket' :
-		current_game_speed = current_game_speed - 0.20
+		GLOBAL.current_game_speed = GLOBAL.current_game_speed - 0.20
 		
-	if current_game_speed <= 0 :
-		current_game_speed = 0.01
+	if GLOBAL.current_game_speed <= 0 :
+		GLOBAL.current_game_speed = 0.01
 
-func _on_dying_timer_timeout():
-	# Reseteamos posicion nave
-	var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
-	player.position =  Vector3( 
-		( level_boundaries.left + level_boundaries.right ) / 2, 
-		( level_boundaries.top - level_boundaries.bottom ) / 2 , 
-		-2 
-		)
-	camera.position.z = -2	
-
-	# Reseteamos nivel :)
-	load_level( current_level_num )
-	player.get_node('Pivot').show()
-	
-	player.get_node('boom/BoomParticle3D').show()
-	player.get_node('boom/BoomParticle3D').waiting = false
-	player.get_node('boom').show()
-	
-	# Habilitamos movimiento
-	player.can_move = true
 
 func level_finished():
 	$LevelComplete.visible = true
@@ -200,18 +130,24 @@ func level_finished():
 	
 
 func _on_end_game_timer_timeout():
-	$GameOverScreen.visible = true
+	GLOBAL.goto_scene( GLOBAL.SCENE_GAME_OVER )
 
-func _on_fire_timer_timeout():
-	can_fire = true
 
 # Speed up if not max speed
 func _on_second_timer_timeout():
 
-	if current_game_speed < game_speed:
-		var new_speed = current_game_speed * 0.10 
+	if GLOBAL.current_game_speed < GLOBAL.game_speed:
+		var new_speed = GLOBAL.current_game_speed * 0.10 
 		if new_speed < 0.1 :
 			new_speed = 0.1
-		current_game_speed += new_speed
-		if current_game_speed > game_speed :
-			current_game_speed = game_speed
+		GLOBAL.current_game_speed += new_speed
+		if GLOBAL.current_game_speed > GLOBAL.game_speed :
+			GLOBAL.current_game_speed = GLOBAL.game_speed
+
+
+func show_fps():
+	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
+
+
+func update_speed_bar():
+	$UI/ProgressBar.value = GLOBAL.current_game_speed / GLOBAL.game_speed * 100

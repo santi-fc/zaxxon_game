@@ -7,11 +7,7 @@ var is_enemy_fire    = false
 
 signal fire_ended;
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	start_position_z = 0
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process( delta ) :
 	if start_position_z == 0 :
 		start_position_z = position.z
@@ -29,10 +25,8 @@ func _physics_process( delta ) :
 
 
 func _on_body_entered( body ):
-	
 	get_node('MeshInstance3D').queue_free()
 	get_node('CollisionShape3D').queue_free()
-		
 	var particle = get_node('sparks/SparksParticles')
 	if body.is_in_group( 'enemigo' ) :
 		body.get_shoot()

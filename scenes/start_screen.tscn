@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://duh7rr6dg8ivx"]
+
+[ext_resource type="Script" path="res://script/start_screen.gd" id="1_klbit"]
+[ext_resource type="Texture2D" uid="uid://516ed0lx321m" path="res://images/MainScreen.png" id="1_w7cg1"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_klbit")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_w7cg1")
+expand_mode = 3
+stretch_mode = 6
+
+[node name="Start" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -259.0
+offset_top = -101.0
+offset_right = 259.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Pulsa cualquier tecla/botón para comenzar..."
+horizontal_alignment = 1

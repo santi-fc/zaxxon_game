@@ -1,0 +1,154 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2qkuxdjn3jpt"]
+
+[ext_resource type="Script" path="res://script/main.gd" id="1_qc56f"]
+[ext_resource type="Texture2D" uid="uid://bju36khkyocec" path="res://images/pexels-felix-mittermeier-956999.jpg" id="2_chqs4"]
+[ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_y1biw"]
+[ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_6gx8a"]
+[ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_ut602"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a1mo4"]
+panorama = ExtResource("2_chqs4")
+filter = false
+
+[sub_resource type="Sky" id="Sky_36dmp"]
+sky_material = SubResource("PanoramaSkyMaterial_a1mo4")
+
+[sub_resource type="Environment" id="Environment_u51cy"]
+background_mode = 2
+sky = SubResource("Sky_36dmp")
+sky_rotation = Vector3(-0.954695, 0, 0)
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avcqs"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6jkc"]
+bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
+
+[sub_resource type="Theme" id="Theme_ur8ss"]
+default_font_size = 36
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_qc56f")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.994703, 0.102792, 6.68716e-08, 0.0786282, 0.76087, 0.644124, 0.066211, 0.640712, -0.764921, 0, 1.2108, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_u51cy")
+
+[node name="UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vides_1" type="Sprite2D" parent="UI"]
+position = Vector2(44, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_y1biw")
+
+[node name="vides_2" type="Sprite2D" parent="UI"]
+position = Vector2(116, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_y1biw")
+
+[node name="vides_3" type="Sprite2D" parent="UI"]
+position = Vector2(188, 46)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_y1biw")
+
+[node name="Speed_Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 9.0
+offset_right = 320.0
+offset_bottom = 35.0
+text = "Speed "
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 37.0
+offset_right = 553.0
+offset_bottom = 64.0
+theme_override_styles/background = SubResource("StyleBoxFlat_avcqs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b6jkc")
+
+[node name="FPS" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_bottom = 49.0
+grow_horizontal = 0
+text = "999 FPS"
+horizontal_alignment = 2
+
+[node name="LevelComplete" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="LevelComplete"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -115.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ur8ss")
+text = "Level Complete"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483, 0)
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(-0.483764, 0.501474, -0.717284, -0.0407435, 0.805774, 0.59082, 0.87425, 0.315042, -0.369373, -1.5581, 1.15182, -0.460496)
+current = true
+fov = 44.0
+
+[node name="DyingTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="EndGameTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="SecondTimer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("3_6gx8a")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0.223282, -1.24702)
+
+[node name="Nivel" parent="." instance=ExtResource("4_ut602")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017717, 0, 0.273286)
+
+[connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]

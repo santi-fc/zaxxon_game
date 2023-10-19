@@ -50,7 +50,7 @@ func show_next_splash() :
 		current_splash = current_splash + 1
 		show_next_splash()
 	else :
-		GLOBAL.goto_scene( GLOBAL.SCENE_MAIN_PATH )
+		GLOBAL.goto_scene( GLOBAL.SCENE_START_PATH )
 
 
 func pass_fast() :
@@ -70,4 +70,4 @@ func _unhandled_input( event ):
 	if not ( event is InputEventKey and event.pressed ) :
 		return
 
-	GLOBAL.goto_scene( GLOBAL.SCENE_MAIN_PATH )
+	GLOBAL.goto_scene( GLOBAL.SCENE_START_PATH )

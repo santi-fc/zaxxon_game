@@ -23,13 +23,14 @@ func _process(_delta):
 
 
 func check_if_shoot() :
-	randomize()
-	var random_number = randf() * 10
-	if random_number > 0 :
-		get_node("/root/Main").make_enemy_fire( self.name )
-		
-	await get_tree().create_timer( 2 ).timeout 
-	check_if_shoot()
+	pass
+#	randomize()
+#	var random_number = randf() * 10
+#	if random_number > 0 :
+#		get_node("/root/Main").make_enemy_fire( self.name )
+#
+#	await get_tree().create_timer( 2 ).timeout 
+#	check_if_shoot()
 	
 func get_shoot() :
 	health = health - 1

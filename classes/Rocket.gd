@@ -17,7 +17,7 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	# Calculamos distancia hasta jugador en eje Z
-	var player = get_parent().get_parent().player
+	var player = GLOBAL.player
 	
 	if player :
 		var player_position_z = player.global_transform.origin.z
