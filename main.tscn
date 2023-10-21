@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=11 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_qc56f"]
 [ext_resource type="Texture2D" uid="uid://bju36khkyocec" path="res://images/pexels-felix-mittermeier-956999.jpg" id="2_chqs4"]
@@ -20,11 +20,7 @@ sky_rotation = Vector3(-0.954695, 0, 0)
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avcqs"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6jkc"]
-bg_color = Color(0.0705882, 0.305882, 0.384314, 1)
+[sub_resource type="Theme" id="Theme_0btrt"]
 
 [sub_resource type="Theme" id="Theme_ur8ss"]
 default_font_size = 36
@@ -42,7 +38,6 @@ shadow_enabled = true
 environment = SubResource("Environment_u51cy")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,23 +62,6 @@ position = Vector2(188, 46)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_y1biw")
 
-[node name="Speed_Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 264.0
-offset_top = 9.0
-offset_right = 320.0
-offset_bottom = 35.0
-text = "Speed "
-
-[node name="ProgressBar" type="ProgressBar" parent="UI"]
-layout_mode = 0
-offset_left = 265.0
-offset_top = 37.0
-offset_right = 553.0
-offset_bottom = 64.0
-theme_override_styles/background = SubResource("StyleBoxFlat_avcqs")
-theme_override_styles/fill = SubResource("StyleBoxFlat_b6jkc")
-
 [node name="FPS" type="Label" parent="UI"]
 layout_mode = 1
 anchors_preset = 1
@@ -94,6 +72,19 @@ offset_bottom = 49.0
 grow_horizontal = 0
 text = "999 FPS"
 horizontal_alignment = 2
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.993033, 1.24865)
+theme = SubResource("Theme_0btrt")
+theme_override_font_sizes/font_size = 50
+text = "00000"
+horizontal_alignment = 1
 
 [node name="LevelComplete" type="Control" parent="."]
 layout_mode = 3
@@ -140,10 +131,6 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="SecondTimer" type="Timer" parent="."]
-wait_time = 0.7
-autostart = true
-
 [node name="Player" parent="." instance=ExtResource("3_6gx8a")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0.223282, -1.24702)
 
@@ -151,4 +138,5 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017717, 0, 0.273286)
 
 [connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
+[connection signal="timeout" from="EndGameTimer" to="." method="_on_end_game_timer_timeout"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]

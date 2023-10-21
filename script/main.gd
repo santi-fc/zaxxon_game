@@ -15,21 +15,21 @@ var camera_initial_position : Vector3
 func _ready():
 	$LevelComplete.hide()
 	GLOBAL.player = get_node( 'Player' )
+	GLOBAL.score_label = get_node( 'UI/Score' )
 	start_game()
 
 
 func _process( _delta ):
 	if $UI.visible: 
 		show_fps()
-		update_speed_bar()
 
 
 func _physics_process( delta ) :
 	current_time += delta
 	if GLOBAL.level_moving :
-		camera.position.z += GLOBAL.current_game_speed * delta
-		if current_time > 0.7 :
-			GLOBAL.player.position.z += GLOBAL.current_game_speed * delta
+		camera.position.z += GLOBAL.game_speed * delta
+		if current_time > 1.4 :
+			GLOBAL.player.position.z += GLOBAL.game_speed * delta
 	
 	if Input.is_action_pressed( 'Pausa' ) :
 		GLOBAL.level_moving = not GLOBAL.level_moving 
@@ -108,20 +108,8 @@ func update_lives():
 			get_node( "UI/vides_" + str( live_counter ) ).hide()
 
 
-func object_killed( _type ):
-	if _type == 'base' :
-		GLOBAL.current_game_speed = GLOBAL.current_game_speed - 0.20
-		
-	if GLOBAL.current_game_speed <= 0 :
-		GLOBAL.current_game_speed = 0.01
-
-
 func object_shooted( _type ):
-	if _type == 'rocket' :
-		GLOBAL.current_game_speed = GLOBAL.current_game_speed - 0.20
-		
-	if GLOBAL.current_game_speed <= 0 :
-		GLOBAL.current_game_speed = 0.01
+	pass
 
 
 func level_finished():
@@ -133,21 +121,5 @@ func _on_end_game_timer_timeout():
 	GLOBAL.goto_scene( GLOBAL.SCENE_GAME_OVER )
 
 
-# Speed up if not max speed
-func _on_second_timer_timeout():
-
-	if GLOBAL.current_game_speed < GLOBAL.game_speed:
-		var new_speed = GLOBAL.current_game_speed * 0.10 
-		if new_speed < 0.1 :
-			new_speed = 0.1
-		GLOBAL.current_game_speed += new_speed
-		if GLOBAL.current_game_speed > GLOBAL.game_speed :
-			GLOBAL.current_game_speed = GLOBAL.game_speed
-
-
 func show_fps():
 	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
-
-
-func update_speed_bar():
-	$UI/ProgressBar.value = GLOBAL.current_game_speed / GLOBAL.game_speed * 100

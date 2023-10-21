@@ -8,7 +8,6 @@ const SCENE_GAME_OVER  = "res://scenes/game_over.tscn"
 # Game variables
 var score : int  = 0
 var game_speed : float = 0.6
-var current_game_speed : float = 0.6
 var max_lives : int = 3
 var current_lives : int = 3
 
@@ -17,6 +16,7 @@ var current_scene : Node
 var level_moving : bool = false
 var player : Node
 var player_can_fire : bool = true
+var score_label : Label
 
 
 func _ready():
@@ -29,6 +29,7 @@ func _process(_delta):
 
 
 func start_game():
+	GLOBAL.score = 0
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
 
@@ -55,6 +56,17 @@ func _deferred_goto_scene( path ):
 
 
 func maximize_window():
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+	DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_MAXIMIZED )
 
 
+func object_killed( _type )->void :
+	match _type :
+		'base' :
+			GLOBAL.add_score( 20 )
+		'torreta' :
+			GLOBAL.add_score( 100 )
+		
+
+func add_score( _score : int )->void :
+	GLOBAL.score = GLOBAL.score + _score
+	GLOBAL.score_label.text = "%05d" % GLOBAL.score

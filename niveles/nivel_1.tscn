@@ -40,8 +40,8 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_8mhgt"]
 size = Vector3(1.1, 0.3, 0.1)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_4tfmd"]
-data = PackedVector3Array(-0.55, 0.15, 0.05, 0.55, 0.15, 0.05, -0.55, -0.15, 0.05, 0.55, 0.15, 0.05, 0.55, -0.15, 0.05, -0.55, -0.15, 0.05, 0.55, 0.15, -0.05, -0.55, 0.15, -0.05, 0.55, -0.15, -0.05, -0.55, 0.15, -0.05, -0.55, -0.15, -0.05, 0.55, -0.15, -0.05, 0.55, 0.15, 0.05, 0.55, 0.15, -0.05, 0.55, -0.15, 0.05, 0.55, 0.15, -0.05, 0.55, -0.15, -0.05, 0.55, -0.15, 0.05, -0.55, 0.15, -0.05, -0.55, 0.15, 0.05, -0.55, -0.15, -0.05, -0.55, 0.15, 0.05, -0.55, -0.15, 0.05, -0.55, -0.15, -0.05, 0.55, 0.15, 0.05, -0.55, 0.15, 0.05, 0.55, 0.15, -0.05, -0.55, 0.15, 0.05, -0.55, 0.15, -0.05, 0.55, 0.15, -0.05, -0.55, -0.15, 0.05, 0.55, -0.15, 0.05, -0.55, -0.15, -0.05, 0.55, -0.15, 0.05, 0.55, -0.15, -0.05, -0.55, -0.15, -0.05)
+[sub_resource type="BoxShape3D" id="BoxShape3D_idmb0"]
+size = Vector3(1.1, 0.3, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o6fyr"]
 albedo_texture = ExtResource("10_lfqfw")
@@ -80,7 +80,7 @@ size = Vector3(1.76221, 1, 1)
 [node name="Nivel" type="Node3D"]
 
 [node name="Wall_ini" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973094, 0.324665, -0.128567)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973094, -0.052921, -0.128567)
 collision_mask = 10
 script = ExtResource("2_x1gla")
 
@@ -126,6 +126,7 @@ shape = SubResource("BoxShape3D_rsgl3")
 [node name="Wall_3" type="StaticBody3D" parent="." groups=["nivel", "wall"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.249569, 0.162021, 3.8989)
 collision_mask = 10
+script = ExtResource("2_x1gla")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0588989, -0.00675964, 0)
@@ -134,7 +135,7 @@ mesh = SubResource("BoxMesh_8mhgt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Wall_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0588989, -0.00675964, 0)
-shape = SubResource("ConcavePolygonShape3D_4tfmd")
+shape = SubResource("BoxShape3D_idmb0")
 
 [node name="Suelo" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.00104704, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00104704, 0, 0, 6.265)
@@ -145,7 +146,7 @@ transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.371
 mesh = SubResource("PlaneMesh_ch1p1")
 
 [node name="base_1" type="StaticBody3D" parent="." groups=["base", "enemigo", "nivel"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396358, 0.0472998, 1.33136)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.134986, 0.0472998, 0.411492)
 script = ExtResource("3_plusm")
 
 [node name="hangar_roundA2" parent="base_1" groups=["nivel"] instance=ExtResource("4_wbj2u")]
