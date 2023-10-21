@@ -9,13 +9,13 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process( delta ) :
 	var particle_node = get_node( 'GPUParticles3D' )
 	if start_hide :
 		timer = timer + ( 1 * delta )
 		if timer > 3 :
 			particle_node.emitting = false
-		start_hide = false
+			start_hide = false
 	
 	if not particle_node.is_emitting() :
 		if timer > 3 + particle_node.lifetime :

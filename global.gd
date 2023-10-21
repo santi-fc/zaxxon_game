@@ -24,7 +24,7 @@ func _ready():
 	current_scene = root.get_child( root.get_child_count() - 1 )
 
 
-func _process(_delta):
+func _process( _delta ):
 	pass
 
 

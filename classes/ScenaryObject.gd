@@ -47,6 +47,7 @@ func get_shoot() :
 		object_fog.position = get_node( 'CollisionShape3D' ).position
 		object_fog.name = 'fog';
 		add_child( object_fog )
+		has_fog = true
 		
 	if health <= 0 :
 		var _object_name = get_object_type()
