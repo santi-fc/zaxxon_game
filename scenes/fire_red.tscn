@@ -16,7 +16,7 @@ emission_energy_multiplier = 100.0
 size = Vector3(0.118518, 0.0964322, 0.988686)
 
 [node name="Fire" type="Area3D"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.000754239, 0, -0.0227533)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_q66eh")

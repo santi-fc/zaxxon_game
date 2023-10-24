@@ -42,18 +42,20 @@ func _physics_process( delta ):
 		
 		var collision = get_slide_collision( index )
 		if collision.get_collider().is_in_group( 'nivel' ):
-			var explosion = get_node( 'boom' )
-			explosion.show()
-			explosion.get_node('BoomParticle3D').one_shot = true
-			explosion.get_node('BoomParticle3D').waiting = false
-			explosion.get_node('BoomParticle3D').emitting = true
-			
-			get_node('Pivot').hide()
-			get_parent().player_crashed()
+			player_crash()
 		
 		if collision.get_collider().is_in_group('level_end') :
 			get_parent().level_finished()
 	
+func player_crash():
+	var explosion = get_node( 'boom' )
+	explosion.show()
+	explosion.get_node('BoomParticle3D').one_shot = true
+	explosion.get_node('BoomParticle3D').waiting = false
+	explosion.get_node('BoomParticle3D').emitting = true
+
+	get_node('Pivot').hide()
+	get_parent().player_crashed()
 
 func reset():
 	get_node('Pivot').show()

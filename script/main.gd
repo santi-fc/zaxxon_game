@@ -57,13 +57,12 @@ func make_fire() :
 func _on_fire_timer_timeout():
 	GLOBAL.player_can_fire = true
 
-
-func make_enemy_fire( _object_name ) :
-	var firing_object = current_level.get_node( str( _object_name ) )
+func make_enemy_fire( firing_object ) :
 	var firing = fire_enemy_scene.instantiate()
 	firing.is_enemy_fire = true
-	firing.global_position = firing_object.global_position
-	current_level.add_child( firing )
+	firing.position = firing_object.global_position
+	firing.position.y += 0.1
+	add_child( firing )
 
 
 func player_crashed() :
@@ -83,20 +82,11 @@ func _on_dying_timer_timeout():
 
 	GLOBAL.player.position =  player_initial_position
 	camera.position = camera_initial_position
-	
+
 	# Habilitamos movimiento
 	GLOBAL.level_moving = true
-	
 	GLOBAL.player.get_node('Pivot').show()
 
-	# Reseteamos nivel :)
-#	load_level( current_level_num )
-#	player.get_node('Pivot').show()
-#
-#	player.get_node('boom/BoomParticle3D').show()
-#	player.get_node('boom/BoomParticle3D').waiting = false
-#	player.get_node('boom').show()
-#
 
 
 func update_lives():
@@ -106,10 +96,6 @@ func update_lives():
 			get_node( "UI/vides_" + str( live_counter )  ).show()
 		else:
 			get_node( "UI/vides_" + str( live_counter ) ).hide()
-
-
-func object_shooted( _type ):
-	pass
 
 
 func level_finished():

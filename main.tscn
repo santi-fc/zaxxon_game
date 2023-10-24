@@ -131,7 +131,7 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="Player" parent="." instance=ExtResource("3_6gx8a")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_6gx8a")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0.223282, -1.24702)
 
 [node name="Nivel" parent="." instance=ExtResource("4_ut602")]

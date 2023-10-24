@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process( _delta ): 
 	
 	# Particle animation starts
 	if not animation_started and emitting :
@@ -18,5 +18,5 @@ func _process(_delta):
 		
 	# Particle animation ends
 	if animation_started and not emitting :
-		get_parent().get_parent().fire_ended.emit()
+		particles_ended.emit()
 	
