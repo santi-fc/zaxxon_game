@@ -27,9 +27,9 @@ func check_if_shoot() :
 	if GLOBAL.level_moving and health > 0  :
 		randomize()
 		var random_number = randf() * 10
-		if random_number > 0 :
+		if random_number > 5 :
 			make_fire()
-	await get_tree().create_timer( 2 ).timeout 
+	await get_tree().create_timer( 1 ).timeout 
 	check_if_shoot()
 
 

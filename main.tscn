@@ -1,24 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=7 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_qc56f"]
-[ext_resource type="Texture2D" uid="uid://bju36khkyocec" path="res://images/pexels-felix-mittermeier-956999.jpg" id="2_chqs4"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_y1biw"]
 [ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_6gx8a"]
 [ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_ut602"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a1mo4"]
-panorama = ExtResource("2_chqs4")
-filter = false
-
-[sub_resource type="Sky" id="Sky_36dmp"]
-sky_material = SubResource("PanoramaSkyMaterial_a1mo4")
-
-[sub_resource type="Environment" id="Environment_u51cy"]
-background_mode = 2
-sky = SubResource("Sky_36dmp")
-sky_rotation = Vector3(-0.954695, 0, 0)
-tonemap_mode = 2
-glow_enabled = true
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 
@@ -33,9 +18,6 @@ script = ExtResource("1_qc56f")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.994703, 0.102792, 6.68716e-08, 0.0786282, 0.76087, 0.644124, 0.066211, 0.640712, -0.764921, 0, 1.2108, 0)
 shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_u51cy")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
