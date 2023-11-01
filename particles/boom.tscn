@@ -26,7 +26,6 @@ radius = 0.01
 height = 0.02
 
 [node name="boom" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="BoomParticle3D" type="GPUParticles3D" parent="."]
 emitting = false

@@ -17,6 +17,7 @@ func _ready():
 	GLOBAL.player = get_node( 'Player' )
 	GLOBAL.score_label = get_node( 'UI/Score' )
 	start_game()
+	show()
 
 
 func _process( _delta ):
@@ -79,14 +80,13 @@ func player_crashed() :
 
 
 func _on_dying_timer_timeout():
-
 	GLOBAL.player.position =  player_initial_position
 	camera.position = camera_initial_position
-
 	# Habilitamos movimiento
 	GLOBAL.level_moving = true
 	GLOBAL.player.get_node('Pivot').show()
-
+	# Reload Level
+	GLOBAL.reload_level()
 
 
 func update_lives():

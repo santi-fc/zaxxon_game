@@ -1,9 +1,9 @@
 extends Node
 
 # Scene places
-const SCENE_START_PATH = "res://scenes/start_screen.tscn"
-const SCENE_MAIN_GAME  = "res://main.tscn"
-const SCENE_GAME_OVER  = "res://scenes/game_over.tscn"
+const SCENE_START_PATH = "res://scenes/02_start_screen.tscn"
+const SCENE_MAIN_GAME  = "res://scenes/03_main.tscn"
+const SCENE_GAME_OVER  = "res://scenes/04_game_over.tscn"
 
 # Game variables
 var score : int  = 0
@@ -32,6 +32,9 @@ func start_game():
 	GLOBAL.score = 0
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
+
+func reload_level():
+	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
 # Public scene change function
 func goto_scene( path ):

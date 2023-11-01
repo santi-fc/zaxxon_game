@@ -1,19 +1,18 @@
 extends GPUParticles3D
 
-var waiting = false;
+var started = false;
 
-# Called when the node enters the scene tree for the first time.
+signal particle_ended;
+
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta) :
-	if not is_emitting() and not waiting:
-		# If is a player explosion, we hide, other exploxion remove
-		var parent = get_parent().get_parent()
-		if ( parent and parent.name == "Player") :
-			waiting = true
-			#hide()
-		else :
-			queue_free()
-			
+	if not is_emitting() and started:
+		started = false
+		particle_ended.emit()
+
+func start():
+	emitting = true
+	started = true

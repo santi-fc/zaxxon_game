@@ -3,7 +3,7 @@ extends CharacterBody3D
 var movement_step_horizontal = 1
 var movement_step_vertical =  1
 var movement_rotation = 10
-var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.11 }
+var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 
 
 func _physics_process( delta ):
@@ -41,21 +41,22 @@ func _physics_process( delta ):
 	for index in range( get_slide_collision_count() ) :
 		
 		var collision = get_slide_collision( index )
-		if collision.get_collider().is_in_group( 'nivel' ):
-			player_crash()
-		
 		if collision.get_collider().is_in_group('level_end') :
 			get_parent().level_finished()
+			
+		player_crash()
 	
 func player_crash():
 	var explosion = get_node( 'boom' )
 	explosion.show()
 	explosion.get_node('BoomParticle3D').one_shot = true
-	explosion.get_node('BoomParticle3D').waiting = false
-	explosion.get_node('BoomParticle3D').emitting = true
+	explosion.get_node('BoomParticle3D').start()
 
 	get_node('Pivot').hide()
 	get_parent().player_crashed()
+
+
+
 
 func reset():
 	get_node('Pivot').show()

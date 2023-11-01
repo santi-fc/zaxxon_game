@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2qkuxdjn3jpt"]
 
-[ext_resource type="Script" path="res://script/main.gd" id="1_qc56f"]
-[ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://ui/vides.png" id="2_y1biw"]
-[ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_6gx8a"]
-[ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_ut602"]
+[ext_resource type="Script" path="res://script/main.gd" id="1_0ckek"]
+[ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://images/vides.png" id="2_5mekk"]
+[ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_l7jfe"]
+[ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_syxoa"]
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 
@@ -11,12 +11,13 @@
 default_font_size = 36
 
 [node name="Main" type="Node3D"]
-script = ExtResource("1_qc56f")
+script = ExtResource("1_0ckek")
 
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.994703, 0.102792, 6.68716e-08, 0.0786282, 0.76087, 0.644124, 0.066211, 0.640712, -0.764921, 0, 1.2108, 0)
+light_energy = 2.691
 shadow_enabled = true
 
 [node name="UI" type="Control" parent="."]
@@ -32,17 +33,17 @@ size_flags_vertical = 3
 [node name="vides_1" type="Sprite2D" parent="UI"]
 position = Vector2(44, 46)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_y1biw")
+texture = ExtResource("2_5mekk")
 
 [node name="vides_2" type="Sprite2D" parent="UI"]
 position = Vector2(116, 46)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_y1biw")
+texture = ExtResource("2_5mekk")
 
 [node name="vides_3" type="Sprite2D" parent="UI"]
 position = Vector2(188, 46)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_y1biw")
+texture = ExtResource("2_5mekk")
 
 [node name="FPS" type="Label" parent="UI"]
 layout_mode = 1
@@ -113,10 +114,10 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="Player" parent="." groups=["player"] instance=ExtResource("3_6gx8a")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_l7jfe")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0.223282, -1.24702)
 
-[node name="Nivel" parent="." instance=ExtResource("4_ut602")]
+[node name="Nivel" parent="." instance=ExtResource("4_syxoa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017717, 0, 0.273286)
 
 [connection signal="timeout" from="DyingTimer" to="." method="_on_dying_timer_timeout"]
