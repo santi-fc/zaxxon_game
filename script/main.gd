@@ -31,9 +31,6 @@ func _physics_process( delta ) :
 		camera.position.z += GLOBAL.game_speed * delta
 		if current_time > 1.4 :
 			GLOBAL.player.position.z += GLOBAL.game_speed * delta
-	
-	if Input.is_action_pressed( 'Pausa' ) :
-		GLOBAL.level_moving = not GLOBAL.level_moving 
 
 
 func start_game():
@@ -57,6 +54,7 @@ func make_fire() :
 
 func _on_fire_timer_timeout():
 	GLOBAL.player_can_fire = true
+
 
 func make_enemy_fire( firing_object ) :
 	var firing = fire_enemy_scene.instantiate()

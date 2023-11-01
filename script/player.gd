@@ -8,6 +8,9 @@ var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 
 func _physics_process( delta ):
 	
+	if Input.is_action_pressed( 'Pausa' ) :
+		GLOBAL.level_moving = not GLOBAL.level_moving 
+		
 	if not GLOBAL.level_moving :
 		return
 	
@@ -32,6 +35,7 @@ func _physics_process( delta ):
 		
 	if Input.is_action_pressed( 'fire' ) :
 		get_parent().make_fire()
+		
 	
 	if not moved :
 		rotation.z = 0

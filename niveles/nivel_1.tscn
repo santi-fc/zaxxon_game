@@ -244,3 +244,27 @@ transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.48243, 0.0551101,
 collision_layer = 4
 motion_mode = 0
 floor_constant_speed = true
+
+[node name="Enemy2" parent="." instance=ExtResource("14_ylikk")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.361745, 0.0551101, 8.09788)
+collision_layer = 4
+motion_mode = 0
+floor_constant_speed = true
+
+[node name="Enemy3" parent="." instance=ExtResource("14_ylikk")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.0327307, 0.0551101, 12.4873)
+collision_layer = 4
+motion_mode = 0
+floor_constant_speed = true
+
+[node name="Enemy4" parent="." instance=ExtResource("14_ylikk")]
+transform = Transform3D(-0.000927097, 0, 0.0799946, 0, 0.08, 0, -0.0799946, 0, -0.000927097, 0.546285, 0.0551101, 11.5828)
+collision_layer = 4
+motion_mode = 0
+floor_constant_speed = true
+
+[node name="Enemy5" parent="." instance=ExtResource("14_ylikk")]
+transform = Transform3D(-0.000927097, 0, 0.0799946, 0, 0.08, 0, -0.0799946, 0, -0.000927097, 0.546285, 0.0551101, 12.3011)
+collision_layer = 4
+motion_mode = 0
+floor_constant_speed = true

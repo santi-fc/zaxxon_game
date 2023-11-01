@@ -8,21 +8,21 @@ size = Vector3(2.12195, 0.800386, 1.85074)
 
 [sub_resource type="Animation" id="Animation_gjud3"]
 resource_name = "take_off"
-length = 7.0
+length = 10.0
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("../nave_enemiga")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 5.1, 1, 0, 2, -20)
+tracks/0/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 10, 1, 0, 3, -40)
 tracks/1/type = "position_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 5.1, 1, 0, 2, -20)
+tracks/1/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 10, 1, 0, 3, -40)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s1ilk"]
 _data = {
@@ -36,14 +36,14 @@ motion_mode = 1
 script = ExtResource("1_0argf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.8)
 shape = SubResource("BoxShape3D_1ysys")
 
 [node name="nave_enemiga" parent="." instance=ExtResource("1_f50ek")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, -0.8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CollisionShape3D")
 libraries = {
 "": SubResource("AnimationLibrary_s1ilk")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
