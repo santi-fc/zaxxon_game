@@ -34,6 +34,7 @@ func _physics_process( delta ) :
 
 
 func start_game():
+	update_lives()
 	$UI.show()
 	camera = get_node("CameraPivot");
 	camera.position.z = -2

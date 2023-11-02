@@ -1,9 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=11 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_0ckek"]
+[ext_resource type="Texture2D" uid="uid://qk11f75sg7jl" path="res://images/fons_space.jpg" id="2_0p1l0"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://images/vides.png" id="2_5mekk"]
 [ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_l7jfe"]
 [ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_syxoa"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3s4s2"]
+panorama = ExtResource("2_0p1l0")
+
+[sub_resource type="Sky" id="Sky_a56ie"]
+sky_material = SubResource("PanoramaSkyMaterial_3s4s2")
+
+[sub_resource type="Environment" id="Environment_l4eer"]
+background_mode = 2
+sky = SubResource("Sky_a56ie")
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 
@@ -19,6 +30,9 @@ script = ExtResource("1_0ckek")
 transform = Transform3D(-0.994703, 0.102792, 6.68716e-08, 0.0786282, 0.76087, 0.644124, 0.066211, 0.640712, -0.764921, 0, 1.2108, 0)
 light_energy = 2.691
 shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_l4eer")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
