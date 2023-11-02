@@ -18,7 +18,5 @@ func blink_start_text() :
 
 
 func _unhandled_input( event ):
-#	if not ( event is InputEventKey and event.pressed ) :
-#		return
-	
-	GLOBAL.start_game()
+	if event is InputEventKey and event.pressed :
+		GLOBAL.start_game()

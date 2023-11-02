@@ -113,4 +113,5 @@ func _on_end_game_timer_timeout():
 
 func show_fps():
 #	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
+	$UI/FPS.hide()
 	pass
