@@ -56,6 +56,6 @@ script = ExtResource("1_xog66")
 amount = 17
 lifetime = 1.99
 randomness = 0.27
-visibility_aabb = AABB(-3, -4, -4, 8, 8, 8)
+visibility_aabb = AABB(-0.925457, -0.688194, -0.847448, 1.81185, 1.37639, 1.6949)
 process_material = SubResource("ParticleProcessMaterial_xdxb6")
 draw_pass_1 = SubResource("SphereMesh_klgkn")

@@ -14,7 +14,12 @@ sky_material = SubResource("PanoramaSkyMaterial_3s4s2")
 
 [sub_resource type="Environment" id="Environment_l4eer"]
 background_mode = 2
+background_energy_multiplier = 0.23
 sky = SubResource("Sky_a56ie")
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_detail_spread = 0.840896
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 

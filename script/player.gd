@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
-var movement_step_horizontal = 1
-var movement_step_vertical =  1
+var movement_step_horizontal = 0.9
+var movement_step_vertical =  0.9
 var movement_rotation = 10
 var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 
+var deceleration_factor = 0.8
+var speed_x = 0
+var speed_y = 0
 
 func _physics_process( delta ):
 	
@@ -15,30 +18,55 @@ func _physics_process( delta ):
 		return
 	
 	var moved = false
-	if Input.is_action_pressed( 'move_right' ) and boundaries.right < position.x :
+	if Input.is_action_pressed( 'move_right' )  :
 		position.x -= movement_step_horizontal * delta
 		rotation.z = -movement_rotation * delta
+		speed_x = -movement_step_horizontal
 		moved = true
-	
-	if Input.is_action_pressed( 'move_left' ) and boundaries.left > position.x :
+	elif Input.is_action_pressed( 'move_left' ) :
 		position.x += movement_step_horizontal * delta
 		rotation.z = movement_rotation * delta
+		speed_x = movement_step_horizontal
 		moved = true
-
-	if Input.is_action_pressed( 'move_up' ) and boundaries.top > position.y :
+	
+	if Input.is_action_pressed( 'move_up' ) :
 		position.y += movement_step_vertical * delta
+		speed_y = movement_step_vertical
 		moved = true
-		
-	if Input.is_action_pressed( 'move_down' ) and boundaries.bottom < position.y :
+	elif Input.is_action_pressed( 'move_down' ) :
 		position.y -= movement_step_vertical * delta
+		speed_y = -movement_step_vertical
 		moved = true
-		
+	
 	if Input.is_action_pressed( 'fire' ) :
 		get_parent().make_fire()
-		
+	
+	# Deceleration	
+	if speed_x > 0.1 :
+		speed_x = speed_x * deceleration_factor
+		position.x += speed_x * delta
+	if speed_x < 0.1 :
+		speed_x = speed_x * deceleration_factor
+		position.x += speed_x * delta
+	if speed_y > 0.1 :
+		speed_y = speed_y * deceleration_factor
+		position.y += speed_y * delta
+	if speed_y < 0.1 :
+		speed_y = speed_y * deceleration_factor
+		position.y += speed_y * delta
+
+	if position.x < boundaries.right  :
+		position.x = boundaries.right
+	if position.x > boundaries.left  :
+		position.x = boundaries.left
+	if boundaries.top < position.y :
+		position.y = boundaries.top
+	if boundaries.bottom > position.y :
+		position.y = boundaries.bottom
 	
 	if not moved :
 		rotation.z = 0
+	
 		
 	move_and_slide()
 
