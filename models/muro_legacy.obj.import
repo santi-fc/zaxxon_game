@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b8yksxj5rf3wp"
+path="res://.godot/imported/muro_legacy.obj-84038fb1381f20b0743cc02615f4f29e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/muro_legacy.obj-84038fb1381f20b0743cc02615f4f29e.mesh"]
+
+source_file="res://models/muro_legacy.obj"
+dest_files=["res://.godot/imported/muro_legacy.obj-84038fb1381f20b0743cc02615f4f29e.mesh", "res://.godot/imported/muro_legacy.obj-84038fb1381f20b0743cc02615f4f29e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

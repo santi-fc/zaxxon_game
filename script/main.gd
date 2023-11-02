@@ -34,14 +34,18 @@ func _physics_process( delta ) :
 
 
 func start_game():
-	update_lives()
-	$UI.show()
+	update_UI()
 	camera = get_node("CameraPivot");
 	camera.position.z = -2
 	GLOBAL.level_moving = true
 	player_initial_position = GLOBAL.player.position
 	camera_initial_position = camera.position
 
+
+func update_UI() :
+	update_lives()
+	GLOBAL.update_score()
+	$UI.show()	
 
 func make_fire() :
 	if GLOBAL.player_can_fire :
@@ -108,4 +112,5 @@ func _on_end_game_timer_timeout():
 
 
 func show_fps():
-	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
+#	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
+	pass

@@ -72,4 +72,8 @@ func object_killed( _type )->void :
 
 func add_score( _score : int )->void :
 	GLOBAL.score = GLOBAL.score + _score
-	GLOBAL.score_label.text = "%05d" % GLOBAL.score
+	update_score()
+
+
+func update_score() :
+	GLOBAL.score_label.text = "%05d" % GLOBAL.score	

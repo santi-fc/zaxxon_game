@@ -27,7 +27,6 @@ func check_if_shoot() :
 	if GLOBAL.level_moving and health > 0  :
 		randomize()
 		var random_number = randf() * 10
-		print( random_number )
 		if random_number > 3 :
 			make_fire()
 		else :
