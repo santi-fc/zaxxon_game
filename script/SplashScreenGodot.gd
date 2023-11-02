@@ -65,9 +65,5 @@ func hide_white_page() :
 	fade_out = true
 
 
-func _unhandled_input( event ):
-	
-#	if not ( event is InputEventKey and event.pressed ) :
-#		return
-
+func _unhandled_input( _event ):
 	GLOBAL.goto_scene( GLOBAL.SCENE_START_PATH )

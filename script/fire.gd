@@ -7,23 +7,49 @@ var speed_enemy = 1
 var is_enemy_fire    = false
 var collided = false
 
+var real_fired = false
+var timer_started = false
+var inital_scale
+
 signal fire_ended;
 
 
 func _physics_process( delta ) :
 	if start_position_z == 0 :
 		start_position_z = position.z
-
+		
 	if is_enemy_fire :
-		position.z -= speed_enemy * delta
-		if position.z + start_position_z <= max_distance :
-			hide()
-			queue_free()
+		physics_process_enemy( delta )
 	else :
 		position.z += speed  * delta
 		if position.z - start_position_z >= max_distance :
+			fire_ended.emit()
 			hide()
 			queue_free()
+
+
+func physics_process_enemy( delta ) :
+	
+	# Fire will appear one sec and then be real fired
+	if not real_fired and not timer_started :
+		inital_scale = scale
+		position.z -= 0.1
+		position.y = position.y + 0.05
+		timer_started = true
+		$EnemyFiredTimer.start()
+	
+	# Fire waiting !!
+	if not real_fired and timer_started :
+		scale = scale * 1.01
+		
+	# Fire moving !!
+	if real_fired : 
+		scale = inital_scale
+		position.z -= speed_enemy * delta
+		if position.z + start_position_z <= max_distance :
+			fire_ended.emit()
+
+	
 
 
 func _on_body_entered( body ):
@@ -49,4 +75,10 @@ func _on_body_entered( body ):
 
 
 func _on_fire_ended():
+	hide()
 	queue_free()
+
+
+func _on_enemy_fired_timer_timeout():
+	start_position_z = position.z
+	real_fired = true

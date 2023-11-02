@@ -27,11 +27,16 @@ func check_if_shoot() :
 	if GLOBAL.level_moving and health > 0  :
 		randomize()
 		var random_number = randf() * 10
+		print( random_number )
 		if random_number > 5 :
 			make_fire()
-	await get_tree().create_timer( 1 ).timeout 
-	check_if_shoot()
+		else :
+			await get_tree().create_timer( 1 ).timeout 
+			check_if_shoot()
 
+# Called back by fire scene when fire ends
+func fire_ended():
+	check_if_shoot()
 
 func get_shoot() :
 	health = health - 1

@@ -61,6 +61,7 @@ func make_enemy_fire( firing_object ) :
 	firing.is_enemy_fire = true
 	firing.position = firing_object.global_position
 	firing.position.y += 0.1
+	firing.fire_ended.connect( firing_object.fire_ended )
 	add_child( firing )
 
 
