@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bh4lxpolqps6e"]
+[gd_scene load_steps=34 format=3 uid="uid://bh4lxpolqps6e"]
 
 [ext_resource type="Script" path="res://classes/WallObject.gd" id="2_x1gla"]
 [ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="3_dy06t"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://d0wixquyvtc32" path="res://textures/nivel_1_suelo.png" id="10_lfqfw"]
 [ext_resource type="ArrayMesh" uid="uid://b8yksxj5rf3wp" path="res://models/muro_legacy.obj" id="14_mdrqt"]
 [ext_resource type="PackedScene" uid="uid://c038cxx8rdeex" path="res://scenes/enemy.tscn" id="14_ylikk"]
+[ext_resource type="PackedScene" uid="uid://dxokbudsabr35" path="res://objects/laser_walls.tscn" id="15_dbdk5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vjd23"]
 size = Vector3(0.223234, 0.166849, 0.167779)
@@ -274,3 +275,6 @@ transform = Transform3D(-0.000927097, 0, 0.0799946, 0, 0.08, 0, -0.0799946, 0, -
 collision_layer = 4
 motion_mode = 0
 floor_constant_speed = true
+
+[node name="LaserWalls" parent="." instance=ExtResource("15_dbdk5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322945, 0.292114, 0.703759)

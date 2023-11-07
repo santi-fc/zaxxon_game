@@ -66,5 +66,5 @@ func hide_white_page() :
 
 
 func _unhandled_input( event ):
-	if event is InputEventKey and event.pressed :
+	if ( event is InputEventKey or event is InputEventJoypadButton ) and event.pressed :
 		GLOBAL.goto_scene( GLOBAL.SCENE_START_PATH )

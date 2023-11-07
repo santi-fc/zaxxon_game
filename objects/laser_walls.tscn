@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxokbudsabr35"]
+
+[ext_resource type="PackedScene" uid="uid://xixriyv551tf" path="res://objects/laser.tscn" id="1_olowc"]
+[ext_resource type="Material" uid="uid://cxed1fhddei6n" path="res://materials/muro.tres" id="2_ad4kj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cpahf"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_27erk"]
+sky_material = SubResource("ProceduralSkyMaterial_cpahf")
+
+[sub_resource type="Environment" id="Environment_7hn4f"]
+background_mode = 2
+sky = SubResource("Sky_27erk")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hiy3v"]
+material = ExtResource("2_ad4kj")
+size = Vector3(0.1, 0.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngms0"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1u6ue"]
+size = Vector3(0.1, 0.5, 0.1)
+
+[node name="LaserWalls" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7hn4f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999353, -0.000894352, 0.0359524, 0, 0.999691, 0.0248683, -0.0359635, -0.0248523, 0.999044, -0.309839, 0, 0.785247)
+
+[node name="Laser" parent="." instance=ExtResource("1_olowc")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.975755, 0.147565, 0)
+
+[node name="Column1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03141, 0, 0)
+mesh = SubResource("BoxMesh_hiy3v")
+skeleton = NodePath("../Laser")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Column1"]
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Column1/StaticBody3D"]
+shape = SubResource("BoxShape3D_ngms0")
+
+[node name="Column2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.384452, 0, 0)
+mesh = SubResource("BoxMesh_hiy3v")
+skeleton = NodePath("../Laser")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Column2"]
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Column2/StaticBody3D"]
+shape = SubResource("BoxShape3D_1u6ue")
