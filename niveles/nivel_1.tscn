@@ -277,4 +277,4 @@ motion_mode = 0
 floor_constant_speed = true
 
 [node name="LaserWalls" parent="." instance=ExtResource("15_dbdk5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322945, 0.292114, 0.703759)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322945, 0.292114, 5.0749)
