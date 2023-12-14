@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dyp18315kl42l"
 path.s3tc="res://.godot/imported/logo_condensed_dark.png-ce9636eec0597305cc16882b578bd077.s3tc.ctex"
+path.etc2="res://.godot/imported/logo_condensed_dark.png-ce9636eec0597305cc16882b578bd077.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/logo_condensed_dark.png"
-dest_files=["res://.godot/imported/logo_condensed_dark.png-ce9636eec0597305cc16882b578bd077.s3tc.ctex"]
+dest_files=["res://.godot/imported/logo_condensed_dark.png-ce9636eec0597305cc16882b578bd077.s3tc.ctex", "res://.godot/imported/logo_condensed_dark.png-ce9636eec0597305cc16882b578bd077.etc2.ctex"]
 
 [params]
 

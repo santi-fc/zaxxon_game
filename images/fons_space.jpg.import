@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://qk11f75sg7jl"
 path.s3tc="res://.godot/imported/fons_space.jpg-71cd9235bbdb04c933dee6e2c824e8c3.s3tc.ctex"
+path.etc2="res://.godot/imported/fons_space.jpg-71cd9235bbdb04c933dee6e2c824e8c3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://images/fons_space.jpg"
-dest_files=["res://.godot/imported/fons_space.jpg-71cd9235bbdb04c933dee6e2c824e8c3.s3tc.ctex"]
+dest_files=["res://.godot/imported/fons_space.jpg-71cd9235bbdb04c933dee6e2c824e8c3.s3tc.ctex", "res://.godot/imported/fons_space.jpg-71cd9235bbdb04c933dee6e2c824e8c3.etc2.ctex"]
 
 [params]
 
