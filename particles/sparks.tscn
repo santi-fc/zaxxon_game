@@ -20,12 +20,12 @@ lifetime_randomness = 0.52
 particle_flag_align_y = true
 direction = Vector3(0, 0, -1)
 spread = 89.5
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 1.0
 initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
 scale_curve = SubResource("CurveTexture_yc3wr")
 color_ramp = SubResource("GradientTexture1D_e3gqh")
-attractor_interaction_enabled = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lwe4s"]
 vertex_color_use_as_albedo = true

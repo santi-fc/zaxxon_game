@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-var movement_step_horizontal = 0.9
-var movement_step_vertical =  0.9
+var movement_step_horizontal = 0.4
+var movement_step_vertical =  0.4
 var movement_rotation = 10
 var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 

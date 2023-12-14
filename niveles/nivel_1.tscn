@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bh4lxpolqps6e"]
+[gd_scene load_steps=32 format=3 uid="uid://bh4lxpolqps6e"]
 
 [ext_resource type="Script" path="res://classes/WallObject.gd" id="2_x1gla"]
 [ext_resource type="Texture2D" uid="uid://biddxrm66kqp2" path="res://textures/brick.png" id="3_dy06t"]
@@ -57,13 +57,6 @@ uv1_scale = Vector3(3, 2, 1)
 lightmap_size_hint = Vector2i(76, 72)
 material = SubResource("StandardMaterial3D_o6fyr")
 size = Vector3(13.042, 0.1, 1.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gxcg7"]
-albedo_color = Color(0, 0, 0.658824, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ch1p1"]
-material = SubResource("StandardMaterial3D_gxcg7")
-size = Vector2(0.1, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cbuwp"]
 size = Vector3(0.212509, 0.0943947, 0.184016)
@@ -156,14 +149,11 @@ skeleton = NodePath("../..")
 
 [node name="Suelo" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.00104704, 0, 0.999999, 0, 1, 0, -0.999999, 0, -0.00104704, 0, 0, 6.265)
+gi_mode = 0
 mesh = SubResource("BoxMesh_a7w40")
 
-[node name="TapaSuelo" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, -0.0132157, 0, -0.258536)
-mesh = SubResource("PlaneMesh_ch1p1")
-
 [node name="base_1" type="StaticBody3D" parent="." groups=["base", "enemigo", "nivel"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.134986, 0.0472998, 0.411492)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00961855, 0.0472998, 2.29724)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_plusm")
@@ -175,6 +165,38 @@ transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0, 0, 0)
 transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0.143151, 0, 0.106278)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144034, 0.0505826, 0.108507)
+shape = SubResource("BoxShape3D_cbuwp")
+
+[node name="base_2" type="StaticBody3D" parent="." groups=["base", "enemigo", "nivel"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.325129, 0.0472998, 2.29724)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_plusm")
+
+[node name="hangar_roundA2" parent="base_2" groups=["nivel"] instance=ExtResource("4_wbj2u")]
+transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0, 0, 0)
+
+[node name="broken" parent="base_2" instance=ExtResource("5_2v4bd")]
+transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0.143151, 0, 0.106278)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base_2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144034, 0.0505826, 0.108507)
+shape = SubResource("BoxShape3D_cbuwp")
+
+[node name="base_3" type="StaticBody3D" parent="." groups=["base", "enemigo", "nivel"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.446083, 0.0472998, 3.244)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_plusm")
+
+[node name="hangar_roundA2" parent="base_3" groups=["nivel"] instance=ExtResource("4_wbj2u")]
+transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0, 0, 0)
+
+[node name="broken" parent="base_3" instance=ExtResource("5_2v4bd")]
+transform = Transform3D(0.072, 0, 0, 0, 0.072, 0, 0, 0, 0.072, 0.143151, 0, 0.106278)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base_3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.144034, 0.0505826, 0.108507)
 shape = SubResource("BoxShape3D_cbuwp")
 
@@ -204,6 +226,23 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.00369918, -0.0088348
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0446777, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="torreta_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00415856, 0.120202, 0.0178225)
+shape = SubResource("BoxShape3D_phoc3")
+
+[node name="torreta_2" type="StaticBody3D" parent="." groups=["enemigo", "nivel", "torreta"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.555786, 0.262037, 3.8823)
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("3_plusm")
+can_fire = true
+
+[node name="broken" parent="torreta_2" instance=ExtResource("9_8pyqt")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.00369918, -0.00883484, 0.0151997)
+
+[node name="turret_single_fixed" parent="torreta_2" instance=ExtResource("9_siocq")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0.0446777, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="torreta_2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00415856, 0.120202, 0.0178225)
 shape = SubResource("BoxShape3D_phoc3")
 
@@ -247,22 +286,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0934448, 0, -0.591675)
 shape = SubResource("BoxShape3D_pr31i")
 
 [node name="Enemy" parent="." instance=ExtResource("14_ylikk")]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -0.48243, 0.0551101, 2.64794)
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.139295, 0.0551101, 0.697881)
 collision_layer = 4
-motion_mode = 0
-floor_constant_speed = true
+collision_mask = 15
+can_fire = true
 
 [node name="Enemy2" parent="." instance=ExtResource("14_ylikk")]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.361745, 0.0551101, 8.09788)
 collision_layer = 4
 motion_mode = 0
 floor_constant_speed = true
+can_fire = true
 
 [node name="Enemy3" parent="." instance=ExtResource("14_ylikk")]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0.0327307, 0.0551101, 12.4873)
 collision_layer = 4
 motion_mode = 0
 floor_constant_speed = true
+can_fire = true
 
 [node name="Enemy4" parent="." instance=ExtResource("14_ylikk")]
 transform = Transform3D(-0.000927097, 0, 0.0799946, 0, 0.08, 0, -0.0799946, 0, -0.000927097, 0.546285, 0.0551101, 11.5828)

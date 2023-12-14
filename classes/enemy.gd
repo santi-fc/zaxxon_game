@@ -10,10 +10,13 @@ var taked_off = false
 
 @export var health = 3 
 @export var behaviour = Enemy.BEHAVIOUR_NONE
+@export var can_fire = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if can_fire :
+		await get_tree().create_timer( 2 ).timeout 
+		check_if_shoot()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,7 +40,7 @@ func get_shoot():
 	# Looses health
 	if health <= 0 and not enemy_dead:
 		enemy_dead = true
-		GLOBAL.object_killed( 'enemy_1' )
+		GLOBAL.object_killed( 'enemy' )
 		
 		# Añadimos explosion
 		var boom = boom_particle.instantiate()
@@ -53,7 +56,7 @@ func get_shoot():
 		for _i in self.get_children () :
 			if  _i.name != 'boom' : 
 				_i.queue_free()
-				
+
 
 func on_particle_ended():
 	get_node('boom').queue_free()
@@ -61,3 +64,20 @@ func on_particle_ended():
 
 func _on_animation_player_animation_finished(anim_name):
 	queue_free()
+	
+func check_if_shoot() :
+	if GLOBAL.level_moving and health > 0  :
+		randomize()
+		var random_number = randf() * 10
+		if random_number > 3 :
+			make_fire()
+		else :
+			await get_tree().create_timer( 1 ).timeout 
+			check_if_shoot()
+
+# Called back by fire scene when fire ends
+func fire_ended():
+	check_if_shoot()
+
+func make_fire() :
+	GLOBAL.current_scene.make_enemy_fire( self, get_node('nave_enemiga') )

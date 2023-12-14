@@ -61,11 +61,19 @@ func _on_fire_timer_timeout():
 	GLOBAL.player_can_fire = true
 
 
-func make_enemy_fire( firing_object ) :
+func make_enemy_fire( firing_object, position_object = null ) :
 	var firing = fire_enemy_scene.instantiate()
 	firing.is_enemy_fire = true
-	firing.position = firing_object.global_position
-	firing.position.y += 0.1
+	firing.inmediate = true
+	
+	# if we have position_object, we get its position
+	if ( position_object ) :
+		firing.position = position_object.global_position
+		firing.position.z -= 0.1
+	else :
+		firing.position = firing_object.global_position
+		firing.position.y += 0.1
+	
 	firing.fire_ended.connect( firing_object.fire_ended )
 	add_child( firing )
 

@@ -7,7 +7,7 @@ const SCENE_GAME_OVER  = "res://scenes/04_game_over.tscn"
 
 # Game variables
 var score : int  = 0
-var game_speed : float = 0.6
+var game_speed : float = 0.6 # 0.6
 var max_lives : int = 3
 var current_lives : int = 3
 
@@ -26,7 +26,6 @@ func _ready():
 
 func _process( _delta ):
 	pass
-
 
 func start_game():
 	GLOBAL.score = 0
@@ -68,7 +67,10 @@ func object_killed( _type )->void :
 			GLOBAL.add_score( 20 )
 		'torreta' :
 			GLOBAL.add_score( 100 )
-		
+		'rocket' :
+			GLOBAL.add_score( 150 )
+		'enemy' :
+			GLOBAL.add_score( 200 )
 
 func add_score( _score : int )->void :
 	GLOBAL.score = GLOBAL.score + _score
