@@ -62,7 +62,7 @@ func on_particle_ended():
 	get_node('boom').queue_free()
 
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	queue_free()
 	
 func check_if_shoot() :

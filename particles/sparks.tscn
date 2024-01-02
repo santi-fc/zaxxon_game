@@ -39,6 +39,7 @@ size = Vector3(0.01, 0.05, 0.01)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.05)
 
 [node name="SparksParticles" type="GPUParticles3D" parent="."]
+cast_shadow = 0
 emitting = false
 amount = 4
 lifetime = 0.2

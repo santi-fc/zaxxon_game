@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://eyhjjwldjg8l"]
+
+[ext_resource type="Texture2D" uid="uid://svgv0ja2qocd" path="res://images/Flare00.PNG" id="1_h3aor"]
+[ext_resource type="Script" path="res://particles/BoomParticle3D.gd" id="2_88a0j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_so373"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_h3aor")
+
+[sub_resource type="Curve" id="Curve_dxypw"]
+_data = [Vector2(0.00316456, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00125945), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_isaw7"]
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_wosbc"]
+_data = [Vector2(0.0158228, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mfwvf"]
+curve_x = SubResource("Curve_dxypw")
+curve_y = SubResource("Curve_isaw7")
+curve_z = SubResource("Curve_wosbc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kmc37"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.15
+scale_max = 0.5
+scale_curve = SubResource("CurveXYZTexture_mfwvf")
+color = Color(5, 2, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ba6qr"]
+
+[node name="Boom2" type="Node3D"]
+
+[node name="BoomParticle3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_so373")
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_kmc37")
+draw_pass_1 = SubResource("QuadMesh_ba6qr")
+script = ExtResource("2_88a0j")

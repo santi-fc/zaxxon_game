@@ -42,19 +42,13 @@ func _physics_process( delta ):
 		get_parent().make_fire()
 	
 	# Deceleration	
-	if speed_x > 0.1 :
+	if speed_x >= 0.1 :
 		speed_x = speed_x * deceleration_factor
 		position.x += speed_x * delta
-	if speed_x < 0.1 :
-		speed_x = speed_x * deceleration_factor
-		position.x += speed_x * delta
-	if speed_y > 0.1 :
+	if speed_y >= 0.1 :
 		speed_y = speed_y * deceleration_factor
 		position.y += speed_y * delta
-	if speed_y < 0.1 :
-		speed_y = speed_y * deceleration_factor
-		position.y += speed_y * delta
-
+	
 	if position.x < boundaries.right  :
 		position.x = boundaries.right
 	if position.x > boundaries.left  :
@@ -75,7 +69,6 @@ func _physics_process( delta ):
 		var collision = get_slide_collision( index )
 		if collision.get_collider().is_in_group('level_end') :
 			get_parent().level_finished()
-			
 		player_crash()
 	
 func player_crash():
@@ -83,6 +76,7 @@ func player_crash():
 	explosion.show()
 	explosion.get_node('BoomParticle3D').one_shot = true
 	explosion.get_node('BoomParticle3D').start()
+	
 
 	get_node('Pivot').hide()
 	get_parent().player_crashed()
