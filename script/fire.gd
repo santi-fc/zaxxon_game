@@ -11,6 +11,7 @@ var collided = false
 var real_fired = false
 var timer_started = false
 var inital_scale
+var played_sound = false
 
 signal fire_ended;
 
@@ -21,6 +22,10 @@ func _physics_process( delta ) :
 	else :
 		position.z += speed * delta
 		current_distance += speed * delta
+		if not played_sound :
+			played_sound = true
+			$FX_Shoot.play();
+		
 	
 	if current_distance >= max_distance :
 		fire_ended.emit()
@@ -52,7 +57,9 @@ func physics_process_enemy( delta ) :
 		scale = inital_scale
 		position.z -= speed_enemy * delta
 		current_distance += speed_enemy * delta
-
+		if not played_sound :
+			played_sound = true
+			$FX_Shoot.play();
 
 func _on_body_entered( body ):
 	if not collided :
@@ -74,6 +81,7 @@ func _on_body_entered( body ):
 
 		particle.emitting = true
 		particle.particles_ended.connect( _on_fire_ended )
+		$FX_Hit.play()
 
 
 func _on_fire_ended():

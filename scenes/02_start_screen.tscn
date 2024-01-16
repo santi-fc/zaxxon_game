@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://duh7rr6dg8ivx"]
+[gd_scene load_steps=4 format=3 uid="uid://duh7rr6dg8ivx"]
 
 [ext_resource type="Script" path="res://script/start_screen.gd" id="1_klbit"]
 [ext_resource type="Texture2D" uid="uid://516ed0lx321m" path="res://images/MainScreen.png" id="1_w7cg1"]
+[ext_resource type="AudioStream" uid="uid://cch68suorxn45" path="res://sound/music_intro.ogg" id="3_5s8tc"]
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -39,3 +40,9 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "Pulsa cualquier tecla/botón para comenzar..."
 horizontal_alignment = 1
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("3_5s8tc")
+volume_db = -25.0

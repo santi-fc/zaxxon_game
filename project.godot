@@ -26,7 +26,6 @@ GLOBAL="*res://script/global.gd"
 [display]
 
 window/stretch/mode="canvas_items"
-window/vsync/vsync_mode=0
 
 [filesystem]
 

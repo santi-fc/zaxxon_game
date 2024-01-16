@@ -70,8 +70,10 @@ func _physics_process( delta ):
 		if collision.get_collider().is_in_group('level_end') :
 			get_parent().level_finished()
 		player_crash()
-	
+
+
 func player_crash():
+	$FX_Explode.play()
 	var explosion = get_node( 'boom' )
 	explosion.show()
 	explosion.get_node('BoomParticle3D').one_shot = true

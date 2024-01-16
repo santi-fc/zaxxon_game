@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4cycxmsvuoeo"]
+[gd_scene load_steps=8 format=3 uid="uid://c4cycxmsvuoeo"]
 
 [ext_resource type="Script" path="res://script/fire.gd" id="1_q66eh"]
 [ext_resource type="PackedScene" uid="uid://dlqvk32enjow0" path="res://particles/sparks.tscn" id="2_3fyph"]
+[ext_resource type="AudioStream" uid="uid://dtk5oek2v2ct2" path="res://sound/fx_laser.ogg" id="3_5vixy"]
+[ext_resource type="AudioStream" uid="uid://dh6h255dp30j0" path="res://sound/FX_hit.ogg" id="4_cj47k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_hukro"]
 size = Vector3(0.1, 0.1, 1)
@@ -32,5 +34,13 @@ shape = SubResource("BoxShape3D_s1y2r")
 
 [node name="sparks" parent="." instance=ExtResource("2_3fyph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 6.54961, 0, 0, -0.136808)
+
+[node name="FX_Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5vixy")
+volume_db = -25.0
+
+[node name="FX_Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cj47k")
+volume_db = -25.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

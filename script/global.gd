@@ -19,28 +19,29 @@ var player_can_fire : bool = true
 var score_label : Label
 
 
-func _ready():
+func _ready() -> void :
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() - 1 )
 
 
-func _process( _delta ):
+func _process( _delta ) -> void :
 	pass
 
-func start_game():
+func start_game() -> void :
 	GLOBAL.score = 0
+	GLOBAL.current_lives = GLOBAL.max_lives
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
 
-func reload_level():
+func reload_level() -> void :
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
 # Public scene change function
-func goto_scene( path ):
+func goto_scene( path ) -> void :
 	call_deferred( "_deferred_goto_scene", path )
 
 
-func _deferred_goto_scene( path ):
+func _deferred_goto_scene( path ) -> void :
 	# Now its safe to remove the current scene
 	current_scene.free()
 	
@@ -57,11 +58,11 @@ func _deferred_goto_scene( path ):
 	get_tree().current_scene = current_scene
 
 
-func maximize_window():
+func maximize_window() -> void :
 	DisplayServer.window_set_mode( DisplayServer.WINDOW_MODE_MAXIMIZED )
 
 
-func object_killed( _type )->void :
+func object_killed( _type ) -> void :
 	match _type :
 		'base' :
 			GLOBAL.add_score( 20 )
@@ -72,10 +73,10 @@ func object_killed( _type )->void :
 		'enemy' :
 			GLOBAL.add_score( 200 )
 
-func add_score( _score : int )->void :
+func add_score( _score : int ) -> void :
 	GLOBAL.score = GLOBAL.score + _score
 	update_score()
 
 
-func update_score() :
+func update_score() -> void :
 	GLOBAL.score_label.text = "%05d" % GLOBAL.score	

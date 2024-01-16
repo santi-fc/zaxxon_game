@@ -12,7 +12,7 @@ var current_time : float
 var player_initial_position : Vector3
 var camera_initial_position : Vector3
 
-func _ready():
+func _ready() : 
 	$LevelComplete.hide()
 	GLOBAL.player = get_node( 'Player' )
 	GLOBAL.score_label = get_node( 'UI/Score' )
@@ -110,16 +110,14 @@ func update_lives():
 			get_node( "UI/vides_" + str( live_counter ) ).hide()
 
 
-func level_finished():
+func level_finished() -> void :
 	$LevelComplete.visible = true
 	await get_tree().create_timer( 5.0 ).timeout
 	
 
-func _on_end_game_timer_timeout():
+func _on_end_game_timer_timeout() -> void :
 	GLOBAL.goto_scene( GLOBAL.SCENE_GAME_OVER )
 
 
-func show_fps():
-#	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
-	$UI/FPS.hide()
-	pass
+func show_fps() -> void :
+	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )

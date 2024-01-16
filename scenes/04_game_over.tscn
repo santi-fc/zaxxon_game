@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhai851m7uass"]
+[gd_scene load_steps=3 format=3 uid="uid://dhai851m7uass"]
 
 [ext_resource type="Script" path="res://script/game_over_screen.gd" id="1_5o48d"]
+[ext_resource type="AudioStream" uid="uid://co83t8drs4d06" path="res://sound/song_game_over.ogg" id="2_81aeo"]
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -50,3 +51,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Press Key/Button to Main Menu"
 horizontal_alignment = 1
+
+[node name="BG_Game_Over" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_81aeo")
+volume_db = -25.0
+autoplay = true
