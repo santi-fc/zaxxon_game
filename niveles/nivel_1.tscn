@@ -285,7 +285,7 @@ collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level_End" groups=["level_end"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0934448, 0, -0.591675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0934448, 0.395943, -0.591675)
 shape = SubResource("BoxShape3D_pr31i")
 
 [node name="Enemy" parent="." instance=ExtResource("14_ylikk")]
@@ -328,11 +328,11 @@ script = ExtResource("16_s5emh")
 
 [node name="BG_start" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("16_jjg0t")
-volume_db = -25.0
+volume_db = -15.0
 
 [node name="BG_loop" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("18_0ct1c")
-volume_db = -25.0
+volume_db = -15.0
 
 [connection signal="finished" from="Sound/BG_start" to="Sound" method="_on_audio_stream_player_finished"]
 [connection signal="finished" from="Sound/BG_loop" to="Sound" method="_on_bg_loop_finished"]

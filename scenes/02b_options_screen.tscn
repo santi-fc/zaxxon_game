@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxikuiix2201l"]
+
+[ext_resource type="Script" path="res://script/02b_options_screen.gd" id="1_cmy68"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nwrju"]
+
+[sub_resource type="Theme" id="Theme_337yp"]
+
+[node name="OptionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cmy68")
+
+[node name="ExitButton" type="Button" parent="."]
+material = SubResource("CanvasItemMaterial_nwrju")
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -119.0
+offset_top = 16.0
+offset_right = -30.0
+offset_bottom = 47.0
+grow_horizontal = 0
+text = "Volver"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 183.0
+offset_right = 483.0
+offset_bottom = 221.0
+
+[node name="SliderVolumen" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 183.0
+offset_right = 459.0
+offset_bottom = 219.0
+theme = SubResource("Theme_337yp")
+min_value = -40.0
+max_value = 0.0
+
+[node name="Label_volumen" type="Label" parent="."]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 154.0
+offset_right = 234.0
+offset_bottom = 177.0
+text = "Volumen"
+
+[node name="Volumen_Numero" type="Label" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 190.0
+offset_right = 551.0
+offset_bottom = 213.0
+text = "75"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="value_changed" from="SliderVolumen" to="." method="_on_slider_volumen_value_changed"]

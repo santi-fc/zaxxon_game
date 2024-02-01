@@ -1,9 +1,12 @@
 extends Node
 
 # Scene places
-const SCENE_START_PATH = "res://scenes/02_start_screen.tscn"
-const SCENE_MAIN_GAME  = "res://scenes/03_main.tscn"
-const SCENE_GAME_OVER  = "res://scenes/04_game_over.tscn"
+const SCENE_START_PATH    = "res://scenes/02_start_screen.tscn"
+const SCENE_OPTION_SCREEN = "res://scenes/02b_options_screen.tscn"
+const SCENE_MAIN_GAME     = "res://scenes/03_main.tscn"
+const SCENE_GAME_OVER     = "res://scenes/04_game_over.tscn"
+
+var MUSIC_INTRO  = load( "res://sound/music_intro.ogg" )
 
 # Game variables
 var score : int  = 0
@@ -18,11 +21,15 @@ var player : Node
 var player_can_fire : bool = true
 var score_label : Label
 
+var master_sound_bus = AudioServer.get_bus_index("Master")
+var current_master_volume = -10
+var game_player
 
 func _ready() -> void :
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() - 1 )
-
+	change_volume( GLOBAL.master_sound_bus, GLOBAL.current_master_volume )
+	game_player = GLOBALSCENE.get_node('GlobalPlayer')
 
 func _process( _delta ) -> void :
 	pass
@@ -32,6 +39,14 @@ func start_game() -> void :
 	GLOBAL.current_lives = GLOBAL.max_lives
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
 
+func exit_game() -> void :
+	get_tree().quit()
+
+func go_to_start() -> void :
+	goto_scene( GLOBAL.SCENE_START_PATH )
+
+func go_to_options() -> void :
+	goto_scene( GLOBAL.SCENE_OPTION_SCREEN )
 
 func reload_level() -> void :
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
@@ -80,3 +95,18 @@ func add_score( _score : int ) -> void :
 
 func update_score() -> void :
 	GLOBAL.score_label.text = "%05d" % GLOBAL.score	
+
+
+func change_volume( _bus : int, _percent : float ) -> void :
+	GLOBAL.current_master_volume = _percent
+	AudioServer.set_bus_volume_db( _bus, _percent )
+
+
+func play_song( _song ) -> void :
+	if ( _song == 'intro' ) :
+		game_player.stream = GLOBAL.MUSIC_INTRO
+		game_player.play()
+		
+
+func stop_song() -> void :
+	game_player.stop()

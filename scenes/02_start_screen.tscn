@@ -24,25 +24,38 @@ texture = ExtResource("1_w7cg1")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="Start" type="Label" parent="."]
+[node name="Sound" type="Node" parent="."]
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("3_5s8tc")
+volume_db = -25.0
+
+[node name="MainMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -259.0
-offset_top = -101.0
-offset_right = 259.0
+offset_left = -183.0
+offset_top = -171.0
+offset_right = 183.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "Pulsa cualquier tecla/botón para comenzar..."
-horizontal_alignment = 1
 
-[node name="Sound" type="Node" parent="."]
+[node name="StartButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+text = "Nueva partida"
 
-[node name="MusicIntro" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("3_5s8tc")
-volume_db = -25.0
+[node name="OptionButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+text = "Opciones"
+
+[node name="ExitButton" type="Button" parent="MainMenu"]
+layout_mode = 2
+text = "Salir
+"
+
+[connection signal="pressed" from="MainMenu/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainMenu/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="pressed" from="MainMenu/ExitButton" to="." method="_on_exit_button_pressed"]
