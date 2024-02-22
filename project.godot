@@ -13,7 +13,6 @@ config_version=5
 config/name="Zaxxon"
 run/main_scene="res://scenes/01_splash_screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-run/max_fps=60
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
@@ -26,6 +25,7 @@ GLOBALSCENE="*res://scenes/00_global.tscn"
 
 [display]
 
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
 [filesystem]

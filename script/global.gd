@@ -6,7 +6,8 @@ const SCENE_OPTION_SCREEN = "res://scenes/02b_options_screen.tscn"
 const SCENE_MAIN_GAME     = "res://scenes/03_main.tscn"
 const SCENE_GAME_OVER     = "res://scenes/04_game_over.tscn"
 
-var MUSIC_INTRO  = load( "res://sound/music_intro.ogg" )
+var MUSIC_INTRO  = load( "res://sound/main_menu.ogg" )
+var MUSIC_LEVEL_1 = load( "res://sound/Level_1.ogg" )
 
 # Game variables
 var score : int  = 0
@@ -24,6 +25,7 @@ var score_label : Label
 var master_sound_bus = AudioServer.get_bus_index("Master")
 var current_master_volume = -10
 var game_player
+var current_song
 
 func _ready() -> void :
 	var root = get_tree().get_root()
@@ -37,7 +39,9 @@ func _process( _delta ) -> void :
 func start_game() -> void :
 	GLOBAL.score = 0
 	GLOBAL.current_lives = GLOBAL.max_lives
+	GLOBAL.play_song( 'level_1' )
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
+	
 
 func exit_game() -> void :
 	get_tree().quit()
@@ -103,8 +107,12 @@ func change_volume( _bus : int, _percent : float ) -> void :
 
 
 func play_song( _song ) -> void :
-	if ( _song == 'intro' ) :
-		game_player.stream = GLOBAL.MUSIC_INTRO
+	if not ( current_song == _song && game_player.playing ) :
+		current_song = _song
+		if ( _song == 'intro' ) :
+			game_player.stream = GLOBAL.MUSIC_INTRO
+		if _song == 'level_1' : 	
+			game_player.stream = GLOBAL.MUSIC_LEVEL_1
 		game_player.play()
 		
 

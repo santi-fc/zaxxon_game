@@ -9,7 +9,7 @@ var deceleration_factor = 0.8
 var speed_x = 0
 var speed_y = 0
 
-func _physics_process( delta ):
+func _physics_process( delta ) -> void :
 	
 	if Input.is_action_pressed( 'Pausa' ) :
 		GLOBAL.level_moving = not GLOBAL.level_moving 
@@ -72,20 +72,17 @@ func _physics_process( delta ):
 		player_crash()
 
 
-func player_crash():
+func player_crash() -> void :
 	$FX_Explode.play()
 	var explosion = get_node( 'boom' )
 	explosion.show()
 	explosion.get_node('BoomParticle3D').one_shot = true
 	explosion.get_node('BoomParticle3D').start()
-	
 
 	get_node('Pivot').hide()
 	get_parent().player_crashed()
 
 
-
-
-func reset():
+func reset() -> void :
 	get_node('Pivot').show()
 	visible = true

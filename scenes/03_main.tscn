@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=9 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_0ckek"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://images/vides.png" id="2_5mekk"]
+[ext_resource type="Theme" uid="uid://ir35piacf5v5" path="res://theme/zaxxon.tres" id="2_kcmmx"]
 [ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_l7jfe"]
 [ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_syxoa"]
 
@@ -36,6 +37,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_kcmmx")
 
 [node name="vides_1" type="Sprite2D" parent="UI"]
 position = Vector2(44, 46)
@@ -68,6 +70,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 6.0
+offset_right = 2.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.993033, 1.24865)
@@ -85,6 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_kcmmx")
 
 [node name="Label" type="Label" parent="LevelComplete"]
 layout_mode = 1
