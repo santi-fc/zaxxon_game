@@ -19,6 +19,7 @@ data = PackedVector3Array(-0.5, 0.2833, 0.65, -1, 0.2, 0.65, -1, 0.2, 0.35, -1, 
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0, 0)
 collision_layer = 2
 collision_mask = 5
+input_ray_pickable = false
 motion_mode = 1
 script = ExtResource("1_urfw5")
 

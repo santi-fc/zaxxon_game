@@ -40,5 +40,6 @@ func _on_slider_volumen_value_changed( value ) -> void :
 
 
 func _on_volver_pressed():
+	GLOBAL.save_config()
 	$MainMenu.show()
 	$OptionMenu.hide()

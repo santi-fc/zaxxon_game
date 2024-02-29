@@ -27,7 +27,10 @@ var current_master_volume = -10
 var game_player
 var current_song
 
+const SAVE_PATH = "user://zaxxon.ini"
+
 func _ready() -> void :
+	self.load_config()
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() - 1 )
 	change_volume( GLOBAL.master_sound_bus, GLOBAL.current_master_volume )
@@ -41,19 +44,23 @@ func start_game() -> void :
 	GLOBAL.current_lives = GLOBAL.max_lives
 	GLOBAL.play_song( 'level_1' )
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
-	
+
 
 func exit_game() -> void :
 	get_tree().quit()
 
+
 func go_to_start() -> void :
 	goto_scene( GLOBAL.SCENE_START_PATH )
+
 
 func go_to_options() -> void :
 	goto_scene( GLOBAL.SCENE_OPTION_SCREEN )
 
+
 func reload_level() -> void :
 	goto_scene( GLOBAL.SCENE_MAIN_GAME )
+
 
 # Public scene change function
 func goto_scene( path ) -> void :
@@ -63,7 +70,7 @@ func goto_scene( path ) -> void :
 func _deferred_goto_scene( path ) -> void :
 	# Now its safe to remove the current scene
 	current_scene.free()
-	
+
 	# Load the new scene
 	var new_scene = ResourceLoader.load( path )
 	
@@ -118,3 +125,15 @@ func play_song( _song ) -> void :
 
 func stop_song() -> void :
 	game_player.stop()
+
+
+func save_config() -> void :
+	var config := ConfigFile.new()
+	config.load( SAVE_PATH )
+	config.set_value( name, "main_volume", current_master_volume )
+	config.save( SAVE_PATH )
+
+func load_config() -> void :
+	var config := ConfigFile.new()
+	config.load( SAVE_PATH )
+	self.current_master_volume = config.get_value( name, "main_volume", current_master_volume )

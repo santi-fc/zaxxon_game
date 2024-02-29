@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var movement_step_horizontal = 0.4
+var movement_step_horizontal = 0.6
 var movement_step_vertical =  0.4
 var movement_rotation = 10
 var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
@@ -60,15 +60,10 @@ func _physics_process( delta ) -> void :
 	
 	if not moved :
 		rotation.z = 0
-	
 		
 	move_and_slide()
 
 	for index in range( get_slide_collision_count() ) :
-		
-		var collision = get_slide_collision( index )
-		if collision.get_collider().is_in_group('level_end') :
-			get_parent().level_finished()
 		player_crash()
 
 

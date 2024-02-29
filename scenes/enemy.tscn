@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c038cxx8rdeex"]
+[gd_scene load_steps=7 format=3 uid="uid://c038cxx8rdeex"]
 
 [ext_resource type="Script" path="res://classes/enemy.gd" id="1_0argf"]
 [ext_resource type="PackedScene" uid="uid://dart3hko45ysg" path="res://models/nave_enemiga.glb" id="1_f50ek"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ysys"]
 size = Vector3(2.12195, 0.800386, 1.85074)
+
+[sub_resource type="Animation" id="Animation_qe6rq"]
+resource_name = "round"
 
 [sub_resource type="Animation" id="Animation_gjud3"]
 resource_name = "take_off"
@@ -26,17 +29,17 @@ tracks/1/keys = PackedFloat32Array(0.1, 1, 0, 0, 0, 10, 1, 0, 3, -40)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s1ilk"]
 _data = {
+"round": SubResource("Animation_qe6rq"),
 "take_off": SubResource("Animation_gjud3")
 }
 
 [node name="Enemy" type="CharacterBody3D" groups=["enemigo"]]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_0argf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438441, 0)
 shape = SubResource("BoxShape3D_1ysys")
 
 [node name="nave_enemiga" parent="." instance=ExtResource("1_f50ek")]

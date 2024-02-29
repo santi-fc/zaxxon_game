@@ -1,14 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=8 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_0ckek"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://images/vides.png" id="2_5mekk"]
 [ext_resource type="Theme" uid="uid://ir35piacf5v5" path="res://theme/zaxxon.tres" id="2_kcmmx"]
 [ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_l7jfe"]
 [ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_syxoa"]
-
-[sub_resource type="Environment" id="Environment_t5p3u"]
-background_mode = 1
-background_color = Color(0.0156863, 0.00784314, 0.00784314, 1)
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 
@@ -26,7 +22,6 @@ light_energy = 3.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_t5p3u")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -112,7 +107,7 @@ vertical_alignment = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-0.483764, 0.501474, -0.717284, -0.0407435, 0.805774, 0.59082, 0.87425, 0.315042, -0.369373, -1.5581, 1.15182, -0.460496)
+transform = Transform3D(-0.617783, 0.444422, -0.648717, -0.0407434, 0.805774, 0.59082, 0.785292, 0.391429, -0.479686, -1.1518, 0.873849, -0.80538)
 current = true
 fov = 44.0
 

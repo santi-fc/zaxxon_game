@@ -3,10 +3,15 @@ extends Node3D
 
 const BEHAVIOUR_NONE = 'static'
 const BEHAVIOUR_TAKE_OFF = 'take_off'
+const BEHAVIOUR_FIND_PLAYER = 'find_player'
 
 var boom_particle = preload("res://particles/boom.tscn")
 var enemy_dead = false
 var taked_off = false
+
+var initial_position : Vector2
+var moving_time : float = 0.0
+var restart_movement : float = 0.0
 
 @export var health = 3 
 @export var behaviour = Enemy.BEHAVIOUR_NONE
@@ -24,15 +29,42 @@ func _process(_delta):
 	pass
 
 
-func _physics_process(_delta):
+func _physics_process( _delta ) -> void :
 	var player = GLOBAL.player
-	if player :
+	if self.behaviour == Enemy.BEHAVIOUR_TAKE_OFF :
+		if player :
+			var player_position_z = player.global_transform.origin.z
+			var my_position_z     = global_transform.origin.z
+			var distance          = my_position_z - player_position_z
+			if distance <= 3 and get_node_or_null( 'AnimationPlayer' ) != null and not taked_off:
+				taked_off = true
+				$AnimationPlayer.play('take_off')
+	if self.behaviour == Enemy.BEHAVIOUR_FIND_PLAYER :
+		if not player :
+			return
+		# if distance <= 3, maintain distance 
 		var player_position_z = player.global_transform.origin.z
-		var my_position_z = global_transform.origin.z
-		var distance = my_position_z - player_position_z
-		if distance <= 3 and get_node_or_null( 'AnimationPlayer' ) != null and not taked_off:
-			taked_off = true
-			$AnimationPlayer.play('take_off')
+		var my_position_z     = global_transform.origin.z
+		var distance          = my_position_z - player_position_z
+		var radious = 1
+		var speed = 2 
+		if  moving_time == 0 :
+			initial_position = Vector2( position.x, position.y )
+		# Start spinning
+		moving_time += _delta
+		var new_position = Vector2( sin( moving_time * speed ) * radious * 0.21, cos( moving_time * speed ) *  radious * 0.21 )
+		position.x = initial_position.x + new_position.x
+		position.y = initial_position.y + new_position.y
+			
+		if distance <= 2 :
+			position.z = position.z + ( GLOBAL.game_speed * _delta )
+			if restart_movement == 0 :
+				restart_movement = _delta
+			restart_movement += _delta
+			if restart_movement > 4 :
+				position.z = position.z - ( GLOBAL.game_speed * _delta )
+
+
 
 func get_shoot():
 	health = health - 1

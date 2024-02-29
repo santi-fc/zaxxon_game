@@ -3,6 +3,8 @@ extends Node3D
 var fire_scene   		= preload("res://scenes/fire.tscn")
 var fire_enemy_scene    = preload("res://scenes/fire_red.tscn")
 
+var ship_scene     = "res://scenes/enemy.tscn"
+
 var player
 var camera
 var current_level
@@ -31,16 +33,24 @@ func _physics_process( delta ) :
 		camera.position.z += GLOBAL.game_speed * delta
 		if current_time > 1.4 :
 			GLOBAL.player.position.z += GLOBAL.game_speed * delta
-
+	# Level complete animation
 
 func start_game():
 	update_UI()
 	camera = get_node("CameraPivot");
 	camera.position.z = -2
 	GLOBAL.level_moving = true
+	
+	# Main player position is
+	# x = 0 y = 0.223 z = -1.247
+	# Camera z = -0.8  ( -0.4 from player)
+	# Debug final of level
+	#camera.position.z = 9.6
+	#GLOBAL.player.position.z = 10
+	
 	player_initial_position = GLOBAL.player.position
 	camera_initial_position = camera.position
-
+	
 
 func update_UI() :
 	update_lives()
@@ -112,7 +122,8 @@ func update_lives():
 
 func level_finished() -> void :
 	$LevelComplete.visible = true
-	await get_tree().create_timer( 5.0 ).timeout
+	await get_tree().create_timer( 3.0 ).timeout
+	start_space_level()
 	
 
 func _on_end_game_timer_timeout() -> void :
@@ -121,3 +132,35 @@ func _on_end_game_timer_timeout() -> void :
 
 func show_fps() -> void :
 	$UI/FPS.text = "FPS: " + str( Engine.get_frames_per_second() )
+
+
+func start_space_level() -> void :
+	$LevelComplete/Label.visible = false
+	$LevelComplete/Label.text = "Enemies aproaching!!"
+	for n in 3 :
+		await get_tree().create_timer( 0.5 ).timeout
+		$LevelComplete/Label.visible = true
+		await get_tree().create_timer( 0.5 ).timeout
+		$LevelComplete/Label.visible = false
+	start_space_horde( 1 )
+	
+func start_space_horde( _level ) -> void :
+	var ship_scene_loaded = ResourceLoader.load( ship_scene )
+	
+	# Instance the new scene
+	var enemy_1 = ship_scene_loaded.instantiate()
+	enemy_1.scale = Vector3(0.08, 0.08, 0.08)
+	enemy_1.position = Vector3( GLOBAL.player.position.x, GLOBAL.player.position.y, GLOBAL.player.position.z + 4 )
+	enemy_1.can_fire = true
+	enemy_1.behaviour = enemy_1.BEHAVIOUR_FIND_PLAYER
+	# Add it to the active scene, as child of root
+	get_tree().get_root().add_child( enemy_1 )
+	
+	await get_tree().create_timer( 3.0 ).timeout
+	enemy_1 = ship_scene_loaded.instantiate()
+	enemy_1.scale = Vector3(0.08, 0.08, 0.08)
+	enemy_1.position = Vector3( GLOBAL.player.position.x, GLOBAL.player.position.y, GLOBAL.player.position.z + 4 )
+	enemy_1.can_fire = true
+	enemy_1.behaviour = enemy_1.BEHAVIOUR_FIND_PLAYER
+	# Add it to the active scene, as child of root
+	get_tree().get_root().add_child( enemy_1 )
