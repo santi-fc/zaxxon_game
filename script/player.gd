@@ -3,7 +3,6 @@ extends CharacterBody3D
 var movement_step_horizontal = 0.6
 var movement_step_vertical =  0.4
 var movement_rotation = 10
-var boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 
 var deceleration_factor = 0.8
 var speed_x = 0
@@ -11,10 +10,19 @@ var speed_y = 0
 
 func _physics_process( delta ) -> void :
 	
+	# If player must be moved to center
+	if GLOBAL.player_to_center :
+		position = lerp( position, 
+							Vector3( 
+								( GLOBAL.level_boundaries.right + GLOBAL.level_boundaries.left ) / 2, 
+								( GLOBAL.level_boundaries.top + GLOBAL.level_boundaries.bottom ) / 2, 
+								position.z ), 
+								delta * GLOBAL.player_to_center_speed )
+			
 	if Input.is_action_pressed( 'Pausa' ) :
 		GLOBAL.level_moving = not GLOBAL.level_moving 
 		
-	if not GLOBAL.level_moving :
+	if not GLOBAL.level_moving or GLOBAL.player_stopped :
 		return
 	
 	var moved = false
@@ -49,14 +57,14 @@ func _physics_process( delta ) -> void :
 		speed_y = speed_y * deceleration_factor
 		position.y += speed_y * delta
 	
-	if position.x < boundaries.right  :
-		position.x = boundaries.right
-	if position.x > boundaries.left  :
-		position.x = boundaries.left
-	if boundaries.top < position.y :
-		position.y = boundaries.top
-	if boundaries.bottom > position.y :
-		position.y = boundaries.bottom
+	if position.x < GLOBAL.level_boundaries.right  :
+		position.x = GLOBAL.level_boundaries.right
+	if position.x > GLOBAL.level_boundaries.left  :
+		position.x = GLOBAL.level_boundaries.left
+	if GLOBAL.level_boundaries.top < position.y :
+		position.y = GLOBAL.level_boundaries.top
+	if GLOBAL.level_boundaries.bottom > position.y :
+		position.y = GLOBAL.level_boundaries.bottom
 	
 	if not moved :
 		rotation.z = 0

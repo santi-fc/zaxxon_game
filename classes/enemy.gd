@@ -12,8 +12,9 @@ var taked_off = false
 var initial_position : Vector2
 var moving_time : float = 0.0
 var restart_movement : float = 0.0
+var spinning_direction : int = 1;
 
-@export var health = 3 
+@export var health = 2
 @export var behaviour = Enemy.BEHAVIOUR_NONE
 @export var can_fire = false
 
@@ -46,18 +47,21 @@ func _physics_process( _delta ) -> void :
 		var player_position_z = player.global_transform.origin.z
 		var my_position_z     = global_transform.origin.z
 		var distance          = my_position_z - player_position_z
-		var radious = 1
+		var radious = 1 
 		var speed = 2 
-		if  moving_time == 0 :
+		if moving_time == 0 :
 			initial_position = Vector2( position.x, position.y )
+			var rng = RandomNumberGenerator.new()
+			spinning_direction = rng.randi_range(-1, 1)
+			
 		# Start spinning
-		moving_time += _delta
+		moving_time += _delta * spinning_direction
 		var new_position = Vector2( sin( moving_time * speed ) * radious * 0.21, cos( moving_time * speed ) *  radious * 0.21 )
 		position.x = initial_position.x + new_position.x
 		position.y = initial_position.y + new_position.y
 			
 		if distance <= 2 :
-			position.z = position.z + ( GLOBAL.game_speed * _delta )
+			position.z = position.z + ( ( GLOBAL.game_speed + 0.2 ) * _delta )
 			if restart_movement == 0 :
 				restart_movement = _delta
 			restart_movement += _delta

@@ -122,6 +122,8 @@ func update_lives():
 
 func level_finished() -> void :
 	$LevelComplete.visible = true
+	GLOBAL.player_stopped = true
+	GLOBAL.player_to_center = true
 	await get_tree().create_timer( 3.0 ).timeout
 	start_space_level()
 	
@@ -142,25 +144,23 @@ func start_space_level() -> void :
 		$LevelComplete/Label.visible = true
 		await get_tree().create_timer( 0.5 ).timeout
 		$LevelComplete/Label.visible = false
+		
+	await get_tree().create_timer( 0.5 ).timeout
+	GLOBAL.set_camara_front()
 	start_space_horde( 1 )
 	
 func start_space_horde( _level ) -> void :
 	var ship_scene_loaded = ResourceLoader.load( ship_scene )
 	
-	# Instance the new scene
-	var enemy_1 = ship_scene_loaded.instantiate()
-	enemy_1.scale = Vector3(0.08, 0.08, 0.08)
-	enemy_1.position = Vector3( GLOBAL.player.position.x, GLOBAL.player.position.y, GLOBAL.player.position.z + 4 )
-	enemy_1.can_fire = true
-	enemy_1.behaviour = enemy_1.BEHAVIOUR_FIND_PLAYER
-	# Add it to the active scene, as child of root
-	get_tree().get_root().add_child( enemy_1 )
+	var enemy_1
 	
-	await get_tree().create_timer( 3.0 ).timeout
-	enemy_1 = ship_scene_loaded.instantiate()
-	enemy_1.scale = Vector3(0.08, 0.08, 0.08)
-	enemy_1.position = Vector3( GLOBAL.player.position.x, GLOBAL.player.position.y, GLOBAL.player.position.z + 4 )
-	enemy_1.can_fire = true
-	enemy_1.behaviour = enemy_1.BEHAVIOUR_FIND_PLAYER
-	# Add it to the active scene, as child of root
-	get_tree().get_root().add_child( enemy_1 )
+	for n in 10 : 
+		# Instance the new scene
+		enemy_1 = ship_scene_loaded.instantiate()
+		enemy_1.scale = Vector3(0.08, 0.08, 0.08)
+		enemy_1.position = Vector3( GLOBAL.player.position.x, GLOBAL.player.position.y, GLOBAL.player.position.z + 4 )
+		enemy_1.can_fire = true
+		enemy_1.behaviour = enemy_1.BEHAVIOUR_FIND_PLAYER
+		# Add it to the active scene, as child of root
+		get_tree().get_root().add_child( enemy_1 )
+		await get_tree().create_timer( 3.0 ).timeout

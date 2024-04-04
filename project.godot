@@ -28,6 +28,10 @@ GLOBALSCENE="*res://scenes/00_global.tscn"
 window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="/home/oberkom/Descargas/pelicula.avi"
+
 [filesystem]
 
 import/blender/enabled=false

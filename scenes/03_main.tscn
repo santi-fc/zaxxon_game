@@ -1,10 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2qkuxdjn3jpt"]
+[gd_scene load_steps=12 format=3 uid="uid://d2qkuxdjn3jpt"]
 
 [ext_resource type="Script" path="res://script/main.gd" id="1_0ckek"]
 [ext_resource type="Texture2D" uid="uid://c47ymwcrejsja" path="res://images/vides.png" id="2_5mekk"]
 [ext_resource type="Theme" uid="uid://ir35piacf5v5" path="res://theme/zaxxon.tres" id="2_kcmmx"]
 [ext_resource type="PackedScene" uid="uid://c243ob6e5llcf" path="res://scenes/player.tscn" id="3_l7jfe"]
 [ext_resource type="PackedScene" uid="uid://bh4lxpolqps6e" path="res://niveles/nivel_1.tscn" id="4_syxoa"]
+
+[sub_resource type="Shader" id="Shader_3mr6a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6joh"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_3mr6a")
+
+[sub_resource type="Sky" id="Sky_4fc74"]
+sky_material = SubResource("ShaderMaterial_g6joh")
+
+[sub_resource type="Environment" id="Environment_c1qb6"]
+sky = SubResource("Sky_4fc74")
+glow_enabled = true
 
 [sub_resource type="Theme" id="Theme_0btrt"]
 
@@ -22,6 +36,7 @@ light_energy = 3.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_c1qb6")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -107,8 +122,7 @@ vertical_alignment = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.483, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(-0.617783, 0.444422, -0.648717, -0.0407434, 0.805774, 0.59082, 0.785292, 0.391429, -0.479686, -1.1518, 0.873849, -0.80538)
-current = true
+transform = Transform3D(-0.617783, 0.444422, -0.648716, -0.0407434, 0.805774, 0.59082, 0.785292, 0.391429, -0.479686, -1.1518, 0.873849, -0.80538)
 fov = 44.0
 
 [node name="DyingTimer" type="Timer" parent="."]

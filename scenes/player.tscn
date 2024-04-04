@@ -49,3 +49,6 @@ shape = SubResource("ConcavePolygonShape3D_dj2cl")
 [node name="FX_Explode" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_s2f1c")
 volume_db = -25.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(10, 2.65546e-07, 4.13089e-08, -2.65547e-07, 9.52752, 3.0375, 4.13025e-08, -3.0375, 9.52752, -1.09239e-06, 9.26642, 12.4955)

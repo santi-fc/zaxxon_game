@@ -18,14 +18,22 @@ var current_lives : int = 3
 # Game behaviour
 var current_scene : Node
 var level_moving : bool = false
+var player_stopped : bool = false
+var player_to_center : bool = false
+var player_to_center_speed : float = 2
 var player : Node
 var player_can_fire : bool = true
 var score_label : Label
+var level_boundaries = { 'left' : 0.65, 'right' : -0.7, 'top' : 0.6, 'bottom' : 0.09 }
 
 var master_sound_bus = AudioServer.get_bus_index("Master")
 var current_master_volume = -10
 var game_player
 var current_song
+
+var camera_speed = 1
+var camera_player_position
+var move_camara_to_front : bool = false
 
 const SAVE_PATH = "user://zaxxon.ini"
 
@@ -37,7 +45,17 @@ func _ready() -> void :
 	game_player = GLOBALSCENE.get_node('GlobalPlayer')
 
 func _process( _delta ) -> void :
-	pass
+	if move_camara_to_front :
+		var camera : Camera3D = current_scene.get_node( "CameraPivot/Camera" )
+		var player_camera : Camera3D = player.get_node( 'Camera3D' )
+		var move_camera_position = Vector3( player_camera.global_transform.origin.x, player_camera.global_transform.origin.y, player_camera.global_transform.origin.z - 0.5 )
+		camera.global_transform.origin = lerp( camera.global_transform.origin, move_camera_position , _delta * camera_speed )
+		
+		var player_direction = player_camera.global_transform.basis
+		var current_rotation = Quaternion( camera.basis )
+		var next_rotation = current_rotation.slerp( Quaternion( player_direction ), _delta * camera_speed)
+		camera.global_transform.basis = Basis( next_rotation )
+
 
 func start_game() -> void :
 	GLOBAL.score = 0
@@ -125,6 +143,13 @@ func play_song( _song ) -> void :
 
 func stop_song() -> void :
 	game_player.stop()
+
+func set_camara_front() -> void :
+	move_camara_to_front = true
+	await get_tree().create_timer( 2.5 ).timeout
+	move_camara_to_front = false
+	GLOBAL.player_stopped = false
+	GLOBAL.player_to_center = false
 
 
 func save_config() -> void :
